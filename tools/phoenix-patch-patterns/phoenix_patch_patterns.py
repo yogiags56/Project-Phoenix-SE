@@ -13,7 +13,6 @@ def clean_comments(s):
     rx=re.compile(r"(\"(?:\\.|[^\"\\])*\"|'(?:\\.|[^'\\])*'|//[^\n]*|/\*[\s\S]*?\*/)")
     a=list(s)
     for m in rx.finditer(s):
-        if m.group().startswith(('"',"'")): continue
         for i,c in enumerate(m.group()):
             if c not in "\r\n": a[m.start()+i]=" "
     return "".join(a)
