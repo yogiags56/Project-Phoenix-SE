@@ -51,7 +51,8 @@ def analyze(root):
     bundles = []
     seen_ids = {}
     for bundle in discover_bundles(root):
-        info_path = bundle / INFO_PLIST
+        candidates = [bundle / "Contents" / INFO_PLIST, bundle / INFO_PLIST]
+        info_path = next((candidate for candidate in candidates if candidate.is_file()), candidates[0])
         if not info_path.is_file():
             bundles.append({
                 "path": str(bundle.relative_to(root)),
