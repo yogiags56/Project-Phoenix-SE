@@ -56,6 +56,10 @@ def arg(v):
     a,b=v.split("=",1)
     if not a.strip() or not b.strip(): raise argparse.ArgumentTypeError("label/path empty")
     return a.strip(),Path(b.strip())
+
+# Public name used by tests and callers.
+parse_input=arg
+
 def markdown(m):
     out=["# Phoenix Patch Pattern Audit","",f"Generated: {m['generated_utc']}","",
       "> Lexical inventory only: no ARM64 disassembly, semantic validation, patch execution, firmware build, or hardware test.","",
