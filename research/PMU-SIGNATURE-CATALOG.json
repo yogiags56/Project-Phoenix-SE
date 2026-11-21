@@ -1,0 +1,3904 @@
+{
+  "schema_version": 1,
+  "artifact": "Phoenix PMU signature and mutation catalog",
+  "provenance": {
+    "repository": "pwnerblu/iphonese-ios16",
+    "path": "patchsrc/pmuhax.c",
+    "branch": "main",
+    "source_blob_sha": "1117445bcb8665d7a812e1bb2b22c4c213329376",
+    "source_url": "https://github.com/pwnerblu/iphonese-ios16/blob/main/patchsrc/pmuhax.c"
+  },
+  "scope": {
+    "source_extraction_only": true,
+    "hardware_validation": false,
+    "patch_application": false,
+    "arm64_semantics_decoded": false
+  },
+  "summary": {
+    "rule_count": 70,
+    "signature_declaration_count": 70,
+    "mutating_rule_count": 66,
+    "anchor_rule_count": 4,
+    "jump_redirect_count": 4,
+    "ldo_before_bytes": 396,
+    "ldo_after_bytes": 396,
+    "ldo_changed_byte_count": 107,
+    "groups": {
+      "GPIO geometry / transfer": 28,
+      "PMU event / mask geometry": 21,
+      "Shutdown interrupt mask size": 1,
+      "25-byte external interrupt mask copy": 4,
+      "LDO index bound": 1,
+      "LDO fixed rail mask": 2,
+      "LDO fixed rail mask high word": 1,
+      "LDO programmable rail mask": 1,
+      "LDO debug entry -> main": 1,
+      "LDO alternate-enable mask test": 1,
+      "LDO alternate-enable false -> normal": 1,
+      "LDO alternate-enable true -> option test": 1,
+      "LDO alternate-enable rails 1,5,14,21": 2,
+      "LDO gate -> mask test": 1,
+      "LDO main anchor": 1,
+      "LDO normal path anchor": 1,
+      "LDO option path anchor": 1,
+      "LDO table ADRP anchor": 1
+    }
+  },
+  "rules": [
+    {
+      "index": 0,
+      "name": "GPIO geometry / transfer",
+      "signature_id": 0,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0x7101501f",
+      "change": true,
+      "signature": [
+        {
+          "value": "0xf94002c8",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xf9405108",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xaa1603e0",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xd63f0100",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x7101801f",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x54000001",
+          "mask": "0xff00001f"
+        },
+        {
+          "value": "0xf940da61",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xaa1303e0",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x94000000",
+          "mask": "0xfc000000"
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "name": "GPIO geometry / transfer",
+      "signature_id": 1,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0x52812c81",
+      "change": true,
+      "signature": [
+        {
+          "value": "0xf9400268",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xf942e508",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x91009fe2",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xaa1303e0",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x52812ce1",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x52800023",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xd63f0100",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x39409fe8",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x32000d08",
+          "mask": "0xffffffff"
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "name": "GPIO geometry / transfer",
+      "signature_id": 2,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0x52812c81",
+      "change": true,
+      "signature": [
+        {
+          "value": "0xf9400268",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xf942e908",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x91009fe2",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xaa1303e0",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x52812ce1",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x52800023",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xd63f0100",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xf9400268",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xf942e508",
+          "mask": "0xffffffff"
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "name": "GPIO geometry / transfer",
+      "signature_id": 3,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0x528002a3",
+      "change": true,
+      "signature": [
+        {
+          "value": "0x910003f5",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x910003e2",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xaa1303e0",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x52800001",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x52800303",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x94000000",
+          "mask": "0xfc000000"
+        },
+        {
+          "value": "0x35000000",
+          "mask": "0xff00001f"
+        },
+        {
+          "value": "0xd2800008",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x91000689",
+          "mask": "0xffffffff"
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "name": "GPIO geometry / transfer",
+      "signature_id": 4,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0xf100551f",
+      "change": true,
+      "signature": [
+        {
+          "value": "0x0a2a018a",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x2a0b014a",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x38286aaa",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x91000508",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xf100611f",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x54000001",
+          "mask": "0xff00001f"
+        },
+        {
+          "value": "0x39429268",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x34000008",
+          "mask": "0xff00001f"
+        },
+        {
+          "value": "0x90000000",
+          "mask": "0x9f00001f"
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "name": "GPIO geometry / transfer",
+      "signature_id": 5,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0x528002a2",
+      "change": true,
+      "signature": [
+        {
+          "value": "0x34000008",
+          "mask": "0xff00001f"
+        },
+        {
+          "value": "0x90000000",
+          "mask": "0x9f00001f"
+        },
+        {
+          "value": "0x91000000",
+          "mask": "0xffc003ff"
+        },
+        {
+          "value": "0x910003e1",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x52800302",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x94000000",
+          "mask": "0xfc000000"
+        },
+        {
+          "value": "0x910003e2",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xaa1303e0",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x52800001",
+          "mask": "0xffffffff"
+        }
+      ]
+    },
+    {
+      "index": 6,
+      "name": "GPIO geometry / transfer",
+      "signature_id": 6,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0x528002a3",
+      "change": true,
+      "signature": [
+        {
+          "value": "0x94000000",
+          "mask": "0xfc000000"
+        },
+        {
+          "value": "0x910003e2",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xaa1303e0",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x52800001",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x52800303",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x94000000",
+          "mask": "0xfc000000"
+        },
+        {
+          "value": "0x14000000",
+          "mask": "0xfc000000"
+        },
+        {
+          "value": "0x52800000",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xf85d83a8",
+          "mask": "0xffffffff"
+        }
+      ]
+    },
+    {
+      "index": 7,
+      "name": "GPIO geometry / transfer",
+      "signature_id": 7,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0x528002a3",
+      "change": true,
+      "signature": [
+        {
+          "value": "0x910163f7",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x910163e2",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xaa1303e0",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x52800001",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x52800303",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x94000000",
+          "mask": "0xfc000000"
+        },
+        {
+          "value": "0x34000000",
+          "mask": "0xff00001f"
+        },
+        {
+          "value": "0xaa0003f5",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x90000000",
+          "mask": "0x9f00001f"
+        }
+      ]
+    },
+    {
+      "index": 8,
+      "name": "GPIO geometry / transfer",
+      "signature_id": 8,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0xf100571f",
+      "change": true,
+      "signature": [
+        {
+          "value": "0x52800022",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xd2800004",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x94000000",
+          "mask": "0xfc000000"
+        },
+        {
+          "value": "0x91000718",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xf100631f",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x54000001",
+          "mask": "0xff00001f"
+        },
+        {
+          "value": "0x90000000",
+          "mask": "0x9f00001f"
+        },
+        {
+          "value": "0x91000000",
+          "mask": "0xffc003ff"
+        },
+        {
+          "value": "0xaa1403e1",
+          "mask": "0xffffffff"
+        }
+      ]
+    },
+    {
+      "index": 9,
+      "name": "GPIO geometry / transfer",
+      "signature_id": 9,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0x528002a3",
+      "change": true,
+      "signature": [
+        {
+          "value": "0x9101c3f8",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x9101c3e2",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xaa1303e0",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x52800001",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x52800303",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x94000000",
+          "mask": "0xfc000000"
+        },
+        {
+          "value": "0x34000000",
+          "mask": "0xff00001f"
+        },
+        {
+          "value": "0xaa0003f6",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x90000000",
+          "mask": "0x9f00001f"
+        }
+      ]
+    },
+    {
+      "index": 10,
+      "name": "GPIO geometry / transfer",
+      "signature_id": 10,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0xf100551f",
+      "change": true,
+      "signature": [
+        {
+          "value": "0x3948414b",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x0a290169",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x39084149",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x91000508",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xf100611f",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x54000001",
+          "mask": "0xff00001f"
+        },
+        {
+          "value": "0xf9400268",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xf942e908",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xaa1303e0",
+          "mask": "0xffffffff"
+        }
+      ]
+    },
+    {
+      "index": 11,
+      "name": "GPIO geometry / transfer",
+      "signature_id": 11,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0x528002a2",
+      "change": true,
+      "signature": [
+        {
+          "value": "0x94000000",
+          "mask": "0xfc000000"
+        },
+        {
+          "value": "0x90000000",
+          "mask": "0x9f00001f"
+        },
+        {
+          "value": "0x91000000",
+          "mask": "0xffc003ff"
+        },
+        {
+          "value": "0x9101c3e1",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x52800302",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x94000000",
+          "mask": "0xfc000000"
+        },
+        {
+          "value": "0xb941e668",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xf90003e8",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x90000000",
+          "mask": "0x9f00001f"
+        }
+      ]
+    },
+    {
+      "index": 12,
+      "name": "GPIO geometry / transfer",
+      "signature_id": 12,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0x710056df",
+      "change": true,
+      "signature": [
+        {
+          "value": "0xa94157f6",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xa8c45ff8",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xd61f0080",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x35000017",
+          "mask": "0xff00001f"
+        },
+        {
+          "value": "0x710062df",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x54000001",
+          "mask": "0xff00001f"
+        },
+        {
+          "value": "0x910003f7",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x52800489",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x90000010",
+          "mask": "0x9f00001f"
+        }
+      ]
+    },
+    {
+      "index": 13,
+      "name": "GPIO geometry / transfer",
+      "signature_id": 13,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0x52800449",
+      "change": true,
+      "signature": [
+        {
+          "value": "0x35000017",
+          "mask": "0xff00001f"
+        },
+        {
+          "value": "0x710062df",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x54000001",
+          "mask": "0xff00001f"
+        },
+        {
+          "value": "0x910003f7",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x52800489",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x90000010",
+          "mask": "0x9f00001f"
+        },
+        {
+          "value": "0x91000210",
+          "mask": "0xffc003ff"
+        },
+        {
+          "value": "0xd63f0200",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x910003e8",
+          "mask": "0xffffffff"
+        }
+      ]
+    },
+    {
+      "index": 14,
+      "name": "GPIO geometry / transfer",
+      "signature_id": 14,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0x52800443",
+      "change": true,
+      "signature": [
+        {
+          "value": "0xf9400288",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xf942e508",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xaa1403e0",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xaa1603e2",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x52800483",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xd63f0100",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xaa0003f5",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x35000000",
+          "mask": "0xff00001f"
+        },
+        {
+          "value": "0xd2800008",
+          "mask": "0xffffffff"
+        }
+      ]
+    },
+    {
+      "index": 15,
+      "name": "GPIO geometry / transfer",
+      "signature_id": 15,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0xf100451f",
+      "change": true,
+      "signature": [
+        {
+          "value": "0xd2800008",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x384026c9",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x38286a69",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x91000508",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xf100491f",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x54000001",
+          "mask": "0xff00001f"
+        },
+        {
+          "value": "0x52800256",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xf9400288",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xf9433108",
+          "mask": "0xffffffff"
+        }
+      ]
+    },
+    {
+      "index": 16,
+      "name": "GPIO geometry / transfer",
+      "signature_id": 16,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0x52800236",
+      "change": true,
+      "signature": [
+        {
+          "value": "0x38286a69",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x91000508",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xf100491f",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x54000001",
+          "mask": "0xff00001f"
+        },
+        {
+          "value": "0x52800256",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xf9400288",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xf9433108",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x12001ec1",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xaa1403e0",
+          "mask": "0xffffffff"
+        }
+      ]
+    },
+    {
+      "index": 17,
+      "name": "GPIO geometry / transfer",
+      "signature_id": 17,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0xf10056df",
+      "change": true,
+      "signature": [
+        {
+          "value": "0x52800023",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xd63f0100",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x35000000",
+          "mask": "0xff00001f"
+        },
+        {
+          "value": "0x910006d6",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xf10062df",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x54000001",
+          "mask": "0xff00001f"
+        },
+        {
+          "value": "0x52800015",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x14000000",
+          "mask": "0xfc000000"
+        },
+        {
+          "value": "0xaa0003f5",
+          "mask": "0xffffffff"
+        }
+      ]
+    },
+    {
+      "index": 18,
+      "name": "GPIO geometry / transfer",
+      "signature_id": 18,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0x7100443f",
+      "change": true,
+      "signature": [
+        {
+          "value": "0x54000003",
+          "mask": "0xff00001f"
+        },
+        {
+          "value": "0x5280003b",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x14000000",
+          "mask": "0xfc000000"
+        },
+        {
+          "value": "0x529fffe8",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x7100483f",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x531f7829",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x11240129",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x528000ca",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x1b0a7c2a",
+          "mask": "0xffffffff"
+        }
+      ]
+    },
+    {
+      "index": 19,
+      "name": "GPIO geometry / transfer",
+      "signature_id": 19,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0x1123014a",
+      "change": true,
+      "signature": [
+        {
+          "value": "0x531f7829",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x11240129",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x528000ca",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x1b0a7c2a",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x1122f54a",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x1a8a3129",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x71005c3f",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x1a898100",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xd65f03c0",
+          "mask": "0xffffffff"
+        }
+      ]
+    },
+    {
+      "index": 20,
+      "name": "GPIO geometry / transfer",
+      "signature_id": 20,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0x7100503f",
+      "change": true,
+      "signature": [
+        {
+          "value": "0x528000ca",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x1b0a7c2a",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x1122f54a",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x1a8a3129",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x71005c3f",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x1a898100",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xd65f03c0",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xa9bc5ff8",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xa90157f6",
+          "mask": "0xffffffff"
+        }
+      ]
+    },
+    {
+      "index": 21,
+      "name": "GPIO geometry / transfer",
+      "signature_id": 21,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0x710056ff",
+      "change": true,
+      "signature": [
+        {
+          "value": "0xa94157f6",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xa8c45ff8",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xd61f0080",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x35000018",
+          "mask": "0xff00001f"
+        },
+        {
+          "value": "0x710062ff",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x54000001",
+          "mask": "0xff00001f"
+        },
+        {
+          "value": "0x910003f8",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x52800489",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x90000010",
+          "mask": "0x9f00001f"
+        }
+      ]
+    },
+    {
+      "index": 22,
+      "name": "GPIO geometry / transfer",
+      "signature_id": 22,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0x52800449",
+      "change": true,
+      "signature": [
+        {
+          "value": "0x35000018",
+          "mask": "0xff00001f"
+        },
+        {
+          "value": "0x710062ff",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x54000001",
+          "mask": "0xff00001f"
+        },
+        {
+          "value": "0x910003f8",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x52800489",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x90000010",
+          "mask": "0x9f00001f"
+        },
+        {
+          "value": "0x91000210",
+          "mask": "0xffc003ff"
+        },
+        {
+          "value": "0xd63f0200",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x910003e8",
+          "mask": "0xffffffff"
+        }
+      ]
+    },
+    {
+      "index": 23,
+      "name": "GPIO geometry / transfer",
+      "signature_id": 23,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0x52800443",
+      "change": true,
+      "signature": [
+        {
+          "value": "0xf942e508",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xaa1403e0",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xaa1503e1",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xaa1703e2",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x52800483",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xd63f0100",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x34000000",
+          "mask": "0xff00001f"
+        },
+        {
+          "value": "0xaa0003f6",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x14000000",
+          "mask": "0xfc000000"
+        }
+      ]
+    },
+    {
+      "index": 24,
+      "name": "GPIO geometry / transfer",
+      "signature_id": 24,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0xf100451f",
+      "change": true,
+      "signature": [
+        {
+          "value": "0xaa1703e9",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x38686a6a",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x3800252a",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x91000508",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xf100491f",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x54000001",
+          "mask": "0xff00001f"
+        },
+        {
+          "value": "0xf9400288",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xf942e908",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xaa1403e0",
+          "mask": "0xffffffff"
+        }
+      ]
+    },
+    {
+      "index": 25,
+      "name": "GPIO geometry / transfer",
+      "signature_id": 25,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0x52800443",
+      "change": true,
+      "signature": [
+        {
+          "value": "0xf942e908",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xaa1403e0",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xaa1503e1",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xaa1703e2",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x52800483",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xd63f0100",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xaa0003f6",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x35000000",
+          "mask": "0xff00001f"
+        },
+        {
+          "value": "0x52800255",
+          "mask": "0xffffffff"
+        }
+      ]
+    },
+    {
+      "index": 26,
+      "name": "GPIO geometry / transfer",
+      "signature_id": 26,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0x52800235",
+      "change": true,
+      "signature": [
+        {
+          "value": "0x52800483",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xd63f0100",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xaa0003f6",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x35000000",
+          "mask": "0xff00001f"
+        },
+        {
+          "value": "0x52800255",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xf9400288",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xf9433108",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x12001ea1",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xaa1403e0",
+          "mask": "0xffffffff"
+        }
+      ]
+    },
+    {
+      "index": 27,
+      "name": "GPIO geometry / transfer",
+      "signature_id": 27,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0xf10056bf",
+      "change": true,
+      "signature": [
+        {
+          "value": "0x52800023",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xd63f0100",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x35000000",
+          "mask": "0xff00001f"
+        },
+        {
+          "value": "0x910006b5",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xf10062bf",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x54000001",
+          "mask": "0xff00001f"
+        },
+        {
+          "value": "0x52800016",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x9100031f",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xf85c83a8",
+          "mask": "0xffffffff"
+        }
+      ]
+    },
+    {
+      "index": 28,
+      "name": "PMU event / mask geometry",
+      "signature_id": 28,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0x52800329",
+      "change": true,
+      "signature": [
+        {
+          "value": "0x94000000",
+          "mask": "0xfc000000"
+        },
+        {
+          "value": "0xd2800008",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x90000009",
+          "mask": "0x9f00001f"
+        },
+        {
+          "value": "0x3dc00120",
+          "mask": "0xffc003ff"
+        },
+        {
+          "value": "0x528003c9",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x4e080d21",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x52801fea",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x5280004b",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x4e080d62",
+          "mask": "0xffffffff"
+        }
+      ]
+    },
+    {
+      "index": 29,
+      "name": "PMU event / mask geometry",
+      "signature_id": 29,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0xf100691f",
+      "change": true,
+      "signature": [
+        {
+          "value": "0x8b08026b",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x3905e56a",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x91000908",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x4ee28400",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xf100791f",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x54000001",
+          "mask": "0xff00001f"
+        },
+        {
+          "value": "0x9105e262",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xf9400268",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xf942e908",
+          "mask": "0xffffffff"
+        }
+      ]
+    },
+    {
+      "index": 30,
+      "name": "PMU event / mask geometry",
+      "signature_id": 30,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0x52800323",
+      "change": true,
+      "signature": [
+        {
+          "value": "0xf9400268",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xf942e908",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xaa1303e0",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x52803801",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x528003c3",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xd63f0100",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x90000002",
+          "mask": "0x9f00001f"
+        },
+        {
+          "value": "0xf9400042",
+          "mask": "0xffc003ff"
+        },
+        {
+          "value": "0xaa1303e0",
+          "mask": "0xffffffff"
+        }
+      ]
+    },
+    {
+      "index": 31,
+      "name": "PMU event / mask geometry",
+      "signature_id": 31,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0x52826021",
+      "change": true,
+      "signature": [
+        {
+          "value": "0xd63f0100",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x90000002",
+          "mask": "0x9f00001f"
+        },
+        {
+          "value": "0xf9400042",
+          "mask": "0xffc003ff"
+        },
+        {
+          "value": "0xaa1303e0",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x5282c021",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xaa1303e3",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x94000000",
+          "mask": "0xfc000000"
+        },
+        {
+          "value": "0xf9404668",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x52858029",
+          "mask": "0xffffffff"
+        }
+      ]
+    },
+    {
+      "index": 32,
+      "name": "PMU event / mask geometry",
+      "signature_id": 32,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0x5284c029",
+      "change": true,
+      "signature": [
+        {
+          "value": "0x5282c021",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xaa1303e3",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x94000000",
+          "mask": "0xfc000000"
+        },
+        {
+          "value": "0xf9404668",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x52858029",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x8b090109",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x5285800a",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x8b0a0102",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x3900013f",
+          "mask": "0xffffffff"
+        }
+      ]
+    },
+    {
+      "index": 33,
+      "name": "PMU event / mask geometry",
+      "signature_id": 33,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0x5284c00a",
+      "change": true,
+      "signature": [
+        {
+          "value": "0x94000000",
+          "mask": "0xfc000000"
+        },
+        {
+          "value": "0xf9404668",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x52858029",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x8b090109",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x5285800a",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x8b0a0102",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x3900013f",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x3900053f",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xf9400268",
+          "mask": "0xffffffff"
+        }
+      ]
+    },
+    {
+      "index": 34,
+      "name": "PMU event / mask geometry",
+      "signature_id": 34,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0x52801301",
+      "change": true,
+      "signature": [
+        {
+          "value": "0x3900053f",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xf9400268",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xf942d108",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xaa1303e0",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x52801601",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xd63f0100",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x79003fff",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xf9400268",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xf942e508",
+          "mask": "0xffffffff"
+        }
+      ]
+    },
+    {
+      "index": 35,
+      "name": "PMU event / mask geometry",
+      "signature_id": 35,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0xf100651f",
+      "change": true,
+      "signature": [
+        {
+          "value": "0x38686a8b",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x2a0a016a",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x38286a8a",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x91000508",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xf100791f",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x54000001",
+          "mask": "0xff00001f"
+        },
+        {
+          "value": "0x3904e27f",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xd2800017",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x52b00018",
+          "mask": "0xffffffff"
+        }
+      ]
+    },
+    {
+      "index": 36,
+      "name": "PMU event / mask geometry",
+      "signature_id": 36,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0xf10066ff",
+      "change": true,
+      "signature": [
+        {
+          "value": "0x394002a8",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x35000008",
+          "mask": "0xff00001f"
+        },
+        {
+          "value": "0x14000000",
+          "mask": "0xfc000000"
+        },
+        {
+          "value": "0x910006f7",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xf1007aff",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x910023f4",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x54000001",
+          "mask": "0xff00001f"
+        },
+        {
+          "value": "0xf94017e8",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x90000009",
+          "mask": "0x9f00001f"
+        }
+      ]
+    },
+    {
+      "index": 37,
+      "name": "PMU event / mask geometry",
+      "signature_id": 37,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0x52800323",
+      "change": true,
+      "signature": [
+        {
+          "value": "0xf9400008",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xf942e508",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x910063e2",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x52803001",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x528003c3",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xd63f0100",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x910003f5",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x910003e2",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xaa1303e0",
+          "mask": "0xffffffff"
+        }
+      ]
+    },
+    {
+      "index": 38,
+      "name": "PMU event / mask geometry",
+      "signature_id": 38,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0x52800323",
+      "change": true,
+      "signature": [
+        {
+          "value": "0xaa0103e2",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xf9400008",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xf942e504",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x52803001",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x528003c3",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xd61f0080",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xd10103ff",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xa9037bfd",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x9100c3fd",
+          "mask": "0xffffffff"
+        }
+      ]
+    },
+    {
+      "index": 39,
+      "name": "PMU event / mask geometry",
+      "signature_id": 39,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0x52800323",
+      "change": true,
+      "signature": [
+        {
+          "value": "0x9a810102",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xf9400008",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xf942e508",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x52802801",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x528003c3",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xd63f0100",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xf85f83a8",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x90000009",
+          "mask": "0x9f00001f"
+        },
+        {
+          "value": "0xf9400129",
+          "mask": "0xffc003ff"
+        }
+      ]
+    },
+    {
+      "index": 40,
+      "name": "PMU event / mask geometry",
+      "signature_id": 40,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0x52800323",
+      "change": true,
+      "signature": [
+        {
+          "value": "0xf9400268",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xf942e908",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xaa1303e0",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x52803801",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x528003c3",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xd63f0100",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xd2800008",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x9104ea74",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x3dc00280",
+          "mask": "0xffffffff"
+        }
+      ]
+    },
+    {
+      "index": 41,
+      "name": "PMU event / mask geometry",
+      "signature_id": 41,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0x52800322",
+      "change": true,
+      "signature": [
+        {
+          "value": "0x54000001",
+          "mask": "0xff00001f"
+        },
+        {
+          "value": "0x90000000",
+          "mask": "0x9f00001f"
+        },
+        {
+          "value": "0x91000000",
+          "mask": "0xffc003ff"
+        },
+        {
+          "value": "0xaa1403e1",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x528003c2",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x94000000",
+          "mask": "0xfc000000"
+        },
+        {
+          "value": "0x39429268",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x34000008",
+          "mask": "0xff00001f"
+        },
+        {
+          "value": "0x90000000",
+          "mask": "0x9f00001f"
+        }
+      ]
+    },
+    {
+      "index": 42,
+      "name": "PMU event / mask geometry",
+      "signature_id": 42,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0x52800322",
+      "change": true,
+      "signature": [
+        {
+          "value": "0x34000008",
+          "mask": "0xff00001f"
+        },
+        {
+          "value": "0x90000000",
+          "mask": "0x9f00001f"
+        },
+        {
+          "value": "0x91000000",
+          "mask": "0xffc003ff"
+        },
+        {
+          "value": "0x9101c3e1",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x528003c2",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x94000000",
+          "mask": "0xfc000000"
+        },
+        {
+          "value": "0xb941e668",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x71001d1f",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x54000000",
+          "mask": "0xff00001f"
+        }
+      ]
+    },
+    {
+      "index": 43,
+      "name": "PMU event / mask geometry",
+      "signature_id": 43,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0x52800323",
+      "change": true,
+      "signature": [
+        {
+          "value": "0x90000002",
+          "mask": "0x9f00001f"
+        },
+        {
+          "value": "0x91000042",
+          "mask": "0xffc003ff"
+        },
+        {
+          "value": "0xaa1303e0",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x52803801",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x528003c3",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xd63f0100",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xa9077fff",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xf90043ff",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x91084275",
+          "mask": "0xffffffff"
+        }
+      ]
+    },
+    {
+      "index": 44,
+      "name": "PMU event / mask geometry",
+      "signature_id": 44,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0x52800322",
+      "change": true,
+      "signature": [
+        {
+          "value": "0x34000008",
+          "mask": "0xff00001f"
+        },
+        {
+          "value": "0x90000000",
+          "mask": "0x9f00001f"
+        },
+        {
+          "value": "0x91000000",
+          "mask": "0xffc003ff"
+        },
+        {
+          "value": "0xaa1403e1",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x528003c2",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x94000000",
+          "mask": "0xfc000000"
+        },
+        {
+          "value": "0xa9037fff",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xf80463ff",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xf90023ff",
+          "mask": "0xffffffff"
+        }
+      ]
+    },
+    {
+      "index": 45,
+      "name": "PMU event / mask geometry",
+      "signature_id": 45,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0x52800323",
+      "change": true,
+      "signature": [
+        {
+          "value": "0xf942e508",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x9100c3e2",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xaa1303e0",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x52803801",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x528003c3",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xd63f0100",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x35000000",
+          "mask": "0xff00001f"
+        },
+        {
+          "value": "0x90000000",
+          "mask": "0x9f00001f"
+        },
+        {
+          "value": "0x91000000",
+          "mask": "0xffc003ff"
+        }
+      ]
+    },
+    {
+      "index": 46,
+      "name": "PMU event / mask geometry",
+      "signature_id": 46,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0x52800322",
+      "change": true,
+      "signature": [
+        {
+          "value": "0x35000000",
+          "mask": "0xff00001f"
+        },
+        {
+          "value": "0x90000000",
+          "mask": "0x9f00001f"
+        },
+        {
+          "value": "0x91000000",
+          "mask": "0xffc003ff"
+        },
+        {
+          "value": "0x9100c3e1",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x528003c2",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x94000000",
+          "mask": "0xfc000000"
+        },
+        {
+          "value": "0x90000000",
+          "mask": "0x9f00001f"
+        },
+        {
+          "value": "0x91000000",
+          "mask": "0xffc003ff"
+        },
+        {
+          "value": "0x9101c3e1",
+          "mask": "0xffffffff"
+        }
+      ]
+    },
+    {
+      "index": 47,
+      "name": "PMU event / mask geometry",
+      "signature_id": 47,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0xf10066df",
+      "change": true,
+      "signature": [
+        {
+          "value": "0x34000000",
+          "mask": "0xff00001f"
+        },
+        {
+          "value": "0x14000000",
+          "mask": "0xfc000000"
+        },
+        {
+          "value": "0x38366aff",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x910006d6",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xf1007adf",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x54000001",
+          "mask": "0xff00001f"
+        },
+        {
+          "value": "0x52800000",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x14000000",
+          "mask": "0xfc000000"
+        },
+        {
+          "value": "0x910003e8",
+          "mask": "0xffffffff"
+        }
+      ]
+    },
+    {
+      "index": 48,
+      "name": "PMU event / mask geometry",
+      "signature_id": 48,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0xf10066bf",
+      "change": true,
+      "signature": [
+        {
+          "value": "0x94000000",
+          "mask": "0xfc000000"
+        },
+        {
+          "value": "0x3500001a",
+          "mask": "0xff00001f"
+        },
+        {
+          "value": "0x38356adf",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x910006b5",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xf1007abf",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x54000001",
+          "mask": "0xff00001f"
+        },
+        {
+          "value": "0xf94017e8",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x90000009",
+          "mask": "0x9f00001f"
+        },
+        {
+          "value": "0xf9400129",
+          "mask": "0xffc003ff"
+        }
+      ]
+    },
+    {
+      "index": 49,
+      "name": "Shutdown interrupt mask size",
+      "signature_id": 49,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0x52800323",
+      "change": true,
+      "signature": [
+        {
+          "value": "0x90000002",
+          "mask": "0x9f00001f"
+        },
+        {
+          "value": "0x91000042",
+          "mask": "0xffc003ff"
+        },
+        {
+          "value": "0xaa1303e0",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x52803801",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x528003c3",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xd63f0100",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xb941d661",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xaa1303e0",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x94000000",
+          "mask": "0xfc000000"
+        }
+      ]
+    },
+    {
+      "index": 50,
+      "name": "25-byte external interrupt mask copy",
+      "signature_id": 50,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0x3cc09020",
+      "change": true,
+      "signature": [
+        {
+          "value": "0xf9400108",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xf90017e8",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x3dc00020",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x3d8003e0",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x3cc0e020",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x3c80e3e0",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x910003f7",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x52800038",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x38766af9",
+          "mask": "0xffffffff"
+        }
+      ]
+    },
+    {
+      "index": 51,
+      "name": "25-byte external interrupt mask copy",
+      "signature_id": 51,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0x3c8093e0",
+      "change": true,
+      "signature": [
+        {
+          "value": "0xf90017e8",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x3dc00020",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x3d8003e0",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x3cc0e020",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x3c80e3e0",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x910003f7",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x52800038",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x38766af9",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x53185eda",
+          "mask": "0xffffffff"
+        }
+      ]
+    },
+    {
+      "index": 52,
+      "name": "25-byte external interrupt mask copy",
+      "signature_id": 52,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0x3cc09020",
+      "change": true,
+      "signature": [
+        {
+          "value": "0xf9400108",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xf90017e8",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x3dc00020",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x3d8003e0",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x3cc0e020",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x3c80e3e0",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x910003f6",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x52800037",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x38756ad8",
+          "mask": "0xffffffff"
+        }
+      ]
+    },
+    {
+      "index": 53,
+      "name": "25-byte external interrupt mask copy",
+      "signature_id": 53,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0x3c8093e0",
+      "change": true,
+      "signature": [
+        {
+          "value": "0xf90017e8",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x3dc00020",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x3d8003e0",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x3cc0e020",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x3c80e3e0",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x910003f6",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x52800037",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x38756ad8",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x34000018",
+          "mask": "0xff00001f"
+        }
+      ]
+    },
+    {
+      "index": 54,
+      "name": "LDO index bound",
+      "signature_id": 54,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0x710072bf",
+      "change": true,
+      "signature": [
+        {
+          "value": "0x91000000",
+          "mask": "0xffc003ff"
+        },
+        {
+          "value": "0x94000000",
+          "mask": "0xfc000000"
+        },
+        {
+          "value": "0x52805858",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x72bc0018",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x710082bf",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x54000008",
+          "mask": "0xff00001f"
+        },
+        {
+          "value": "0x2a1503fa",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x9000000a",
+          "mask": "0x9f00001f"
+        },
+        {
+          "value": "0x9100014a",
+          "mask": "0xffc003ff"
+        }
+      ]
+    },
+    {
+      "index": 55,
+      "name": "LDO fixed rail mask",
+      "signature_id": 55,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0x52810008",
+      "change": true,
+      "signature": [
+        {
+          "value": "0x9100014a",
+          "mask": "0xffc003ff"
+        },
+        {
+          "value": "0x52800188",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x9ba82abc",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x34000016",
+          "mask": "0xff00001f"
+        },
+        {
+          "value": "0xd2810008",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xf2a7c008",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xf2c00028",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x9ada2508",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x37000008",
+          "mask": "0xfff8001f"
+        }
+      ]
+    },
+    {
+      "index": 56,
+      "name": "LDO fixed rail mask",
+      "signature_id": 56,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0x72a3e008",
+      "change": true,
+      "signature": [
+        {
+          "value": "0x52800188",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x9ba82abc",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x34000016",
+          "mask": "0xff00001f"
+        },
+        {
+          "value": "0xd2810008",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xf2a7c008",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xf2c00028",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x9ada2508",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x37000008",
+          "mask": "0xfff8001f"
+        },
+        {
+          "value": "0x529effe8",
+          "mask": "0xffffffff"
+        }
+      ]
+    },
+    {
+      "index": 57,
+      "name": "LDO fixed rail mask high word",
+      "signature_id": 57,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0xd503201f",
+      "change": true,
+      "signature": [
+        {
+          "value": "0x9ba82abc",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x34000016",
+          "mask": "0xff00001f"
+        },
+        {
+          "value": "0xd2810008",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xf2a7c008",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xf2c00028",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x9ada2508",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x37000008",
+          "mask": "0xfff8001f"
+        },
+        {
+          "value": "0x529effe8",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x72b83fe8",
+          "mask": "0xffffffff"
+        }
+      ]
+    },
+    {
+      "index": 58,
+      "name": "LDO programmable rail mask",
+      "signature_id": 58,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0x72a01fe8",
+      "change": true,
+      "signature": [
+        {
+          "value": "0xf2c00028",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x9ada2508",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x37000008",
+          "mask": "0xfff8001f"
+        },
+        {
+          "value": "0x529effe8",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x72b83fe8",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x9ada2508",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x37000008",
+          "mask": "0xfff8001f"
+        },
+        {
+          "value": "0x5280001b",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x79400f99",
+          "mask": "0xffffffff"
+        }
+      ]
+    },
+    {
+      "index": 59,
+      "name": "LDO debug entry -> main",
+      "signature_id": 59,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0xd503201f",
+      "change": true,
+      "signature": [
+        {
+          "value": "0xaa0103f5",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xaa0003f3",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x3900bfff",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xb940a008",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x34000008",
+          "mask": "0xff00001f"
+        },
+        {
+          "value": "0x110006a8",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x2a1703e9",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x2a1403ea",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xa901abe9",
+          "mask": "0xffffffff"
+        }
+      ]
+    },
+    {
+      "index": 60,
+      "name": "LDO alternate-enable mask test",
+      "signature_id": 60,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0x9ada2508",
+      "change": true,
+      "signature": [
+        {
+          "value": "0xaa0003f3",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x3900bfff",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xb940a008",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x34000008",
+          "mask": "0xff00001f"
+        },
+        {
+          "value": "0x110006a8",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x2a1703e9",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x2a1403ea",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xa901abe9",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x2a1603ea",
+          "mask": "0xffffffff"
+        }
+      ]
+    },
+    {
+      "index": 61,
+      "name": "LDO alternate-enable false -> normal",
+      "signature_id": 61,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0xd503201f",
+      "change": true,
+      "signature": [
+        {
+          "value": "0x3900bfff",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xb940a008",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x34000008",
+          "mask": "0xff00001f"
+        },
+        {
+          "value": "0x110006a8",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x2a1703e9",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x2a1403ea",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xa901abe9",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x2a1603ea",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xa900abe8",
+          "mask": "0xffffffff"
+        }
+      ]
+    },
+    {
+      "index": 62,
+      "name": "LDO alternate-enable true -> option test",
+      "signature_id": 62,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0xd503201f",
+      "change": true,
+      "signature": [
+        {
+          "value": "0xb940a008",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x34000008",
+          "mask": "0xff00001f"
+        },
+        {
+          "value": "0x110006a8",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x2a1703e9",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x2a1403ea",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xa901abe9",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x2a1603ea",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xa900abe8",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x2a1503e9",
+          "mask": "0xffffffff"
+        }
+      ]
+    },
+    {
+      "index": 63,
+      "name": "LDO alternate-enable rails 1,5,14,21",
+      "signature_id": 63,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0x52880448",
+      "change": true,
+      "signature": [
+        {
+          "value": "0x5280001b",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x79400f99",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xf940d660",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x94000000",
+          "mask": "0xfc000000"
+        },
+        {
+          "value": "0x121d7aa8",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x7100051f",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x54000001",
+          "mask": "0xff00001f"
+        },
+        {
+          "value": "0x36000017",
+          "mask": "0xfff8001f"
+        },
+        {
+          "value": "0x52800188",
+          "mask": "0xffffffff"
+        }
+      ]
+    },
+    {
+      "index": 64,
+      "name": "LDO alternate-enable rails 1,5,14,21",
+      "signature_id": 64,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0x72a00408",
+      "change": true,
+      "signature": [
+        {
+          "value": "0x79400f99",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xf940d660",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x94000000",
+          "mask": "0xfc000000"
+        },
+        {
+          "value": "0x121d7aa8",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x7100051f",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x54000001",
+          "mask": "0xff00001f"
+        },
+        {
+          "value": "0x36000017",
+          "mask": "0xfff8001f"
+        },
+        {
+          "value": "0x52800188",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x90000009",
+          "mask": "0x9f00001f"
+        }
+      ]
+    },
+    {
+      "index": 65,
+      "name": "LDO gate -> mask test",
+      "signature_id": 65,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0xd503201f",
+      "change": true,
+      "signature": [
+        {
+          "value": "0xf940d660",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x94000000",
+          "mask": "0xfc000000"
+        },
+        {
+          "value": "0x121d7aa8",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x7100051f",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x54000001",
+          "mask": "0xff00001f"
+        },
+        {
+          "value": "0x36000017",
+          "mask": "0xfff8001f"
+        },
+        {
+          "value": "0x52800188",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x90000009",
+          "mask": "0x9f00001f"
+        },
+        {
+          "value": "0x91000129",
+          "mask": "0xffc003ff"
+        }
+      ]
+    },
+    {
+      "index": 66,
+      "name": "LDO main anchor",
+      "signature_id": 66,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0x52805858",
+      "change": false,
+      "signature": [
+        {
+          "value": "0xf90003e9",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x90000000",
+          "mask": "0x9f00001f"
+        },
+        {
+          "value": "0x91000000",
+          "mask": "0xffc003ff"
+        },
+        {
+          "value": "0x94000000",
+          "mask": "0xfc000000"
+        },
+        {
+          "value": "0x52805858",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x72bc0018",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x710082bf",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x54000008",
+          "mask": "0xff00001f"
+        },
+        {
+          "value": "0x2a1503fa",
+          "mask": "0xffffffff"
+        }
+      ]
+    },
+    {
+      "index": 67,
+      "name": "LDO normal path anchor",
+      "signature_id": 67,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0x340004fb",
+      "change": false,
+      "signature": [
+        {
+          "value": "0x52800023",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xd63f0120",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xaa0003f8",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x35000000",
+          "mask": "0xff00001f"
+        },
+        {
+          "value": "0x3400001b",
+          "mask": "0xff00001f"
+        },
+        {
+          "value": "0xf9400268",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xf942e508",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x9100bfe2",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0xaa1303e0",
+          "mask": "0xffffffff"
+        }
+      ]
+    },
+    {
+      "index": 68,
+      "name": "LDO option path anchor",
+      "signature_id": 68,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0x36000237",
+      "change": false,
+      "signature": [
+        {
+          "value": "0x94000000",
+          "mask": "0xfc000000"
+        },
+        {
+          "value": "0x121d7aa8",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x7100051f",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x54000001",
+          "mask": "0xff00001f"
+        },
+        {
+          "value": "0x36000017",
+          "mask": "0xfff8001f"
+        },
+        {
+          "value": "0x52800188",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x90000009",
+          "mask": "0x9f00001f"
+        },
+        {
+          "value": "0x91000129",
+          "mask": "0xffc003ff"
+        },
+        {
+          "value": "0x9b082748",
+          "mask": "0xffffffff"
+        }
+      ]
+    },
+    {
+      "index": 69,
+      "name": "LDO table ADRP anchor",
+      "signature_id": 69,
+      "signature_word_count": 9,
+      "patch_word_index": 4,
+      "replacement_word": "0xb0ff6f2a",
+      "change": false,
+      "signature": [
+        {
+          "value": "0x72bc0018",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x710082bf",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x54000008",
+          "mask": "0xff00001f"
+        },
+        {
+          "value": "0x2a1503fa",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x9000000a",
+          "mask": "0x9f00001f"
+        },
+        {
+          "value": "0x9100014a",
+          "mask": "0xffc003ff"
+        },
+        {
+          "value": "0x52800188",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x9ba82abc",
+          "mask": "0xffffffff"
+        },
+        {
+          "value": "0x34000016",
+          "mask": "0xff00001f"
+        }
+      ]
+    }
+  ],
+  "jumps": [
+    {
+      "source_rule": 59,
+      "target_rule": 66,
+      "branch_kind": "b"
+    },
+    {
+      "source_rule": 61,
+      "target_rule": 67,
+      "branch_kind": "tbz"
+    },
+    {
+      "source_rule": 62,
+      "target_rule": 68,
+      "branch_kind": "b"
+    },
+    {
+      "source_rule": 65,
+      "target_rule": 60,
+      "branch_kind": "b"
+    }
+  ],
+  "ldo_table": {
+    "before_length": 396,
+    "after_length": 396,
+    "before_hex": "b00405ffff0000210b030100b00405ffff0300220c030100b00405ffff0000230d030100b00405ffff0000240e030100600905ffff0000250f030100c409197f7f03002610030100b00405ffff00002711030100b00405ffff00002812030100b00405ffff00002913030100580205ffff00002a14030100b00405ffff00002b15030100080700000000000000000000b00405ffff00002d16030100580205ffff00002e17030100580205ffff00002f18030100b00405ffff00003019030100c20105000000011000030100c201050000000111010301005802050000000112020301004c040500000001130303010058020500000001140403010058020500000001150503010008070500000001160603010058020500000001170703010058020500000001180803010000000000000000001f03010000000000000000002003010000000000000000002103010000000000000000002303010000000000000000001a0301008813321f1f0000361b0301008813321f1f0000321c030100000000000000000010030e00",
+    "after_hex": "600905ffff00002109030100b00405ffff0200220a030100600905ffff0000230b030100580205ffff0000240c030100600905ffff0000250d030100b004197f7f0200260e030100600905ffff0000270f030100600905ffff00002810030100600905ffff00002911030100580205ffff00002a12030100600905ffff00002b13030100080700000000000000000000600905ffff00002d14030100580205ffff00002e15030100b00405ffff02002f16030100f40105000000011000030100f401050000000111010301005802050000000112020301004c04050000000113030301005802050000000114040301005802050000000115050301004c040500000801160603010058020500000001170703010058020500000001180803010000000000000000001803010000000000000000001903010000000000000000001a03010000000000000000001b03010000000000000000000e030e00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "changed_bytes": [
+      {
+        "offset": 0,
+        "before": 176,
+        "after": 96
+      },
+      {
+        "offset": 1,
+        "before": 4,
+        "after": 9
+      },
+      {
+        "offset": 8,
+        "before": 11,
+        "after": 9
+      },
+      {
+        "offset": 17,
+        "before": 3,
+        "after": 2
+      },
+      {
+        "offset": 20,
+        "before": 12,
+        "after": 10
+      },
+      {
+        "offset": 24,
+        "before": 176,
+        "after": 96
+      },
+      {
+        "offset": 25,
+        "before": 4,
+        "after": 9
+      },
+      {
+        "offset": 32,
+        "before": 13,
+        "after": 11
+      },
+      {
+        "offset": 36,
+        "before": 176,
+        "after": 88
+      },
+      {
+        "offset": 37,
+        "before": 4,
+        "after": 2
+      },
+      {
+        "offset": 44,
+        "before": 14,
+        "after": 12
+      },
+      {
+        "offset": 56,
+        "before": 15,
+        "after": 13
+      },
+      {
+        "offset": 60,
+        "before": 196,
+        "after": 176
+      },
+      {
+        "offset": 61,
+        "before": 9,
+        "after": 4
+      },
+      {
+        "offset": 65,
+        "before": 3,
+        "after": 2
+      },
+      {
+        "offset": 68,
+        "before": 16,
+        "after": 14
+      },
+      {
+        "offset": 72,
+        "before": 176,
+        "after": 96
+      },
+      {
+        "offset": 73,
+        "before": 4,
+        "after": 9
+      },
+      {
+        "offset": 80,
+        "before": 17,
+        "after": 15
+      },
+      {
+        "offset": 84,
+        "before": 176,
+        "after": 96
+      },
+      {
+        "offset": 85,
+        "before": 4,
+        "after": 9
+      },
+      {
+        "offset": 92,
+        "before": 18,
+        "after": 16
+      },
+      {
+        "offset": 96,
+        "before": 176,
+        "after": 96
+      },
+      {
+        "offset": 97,
+        "before": 4,
+        "after": 9
+      },
+      {
+        "offset": 104,
+        "before": 19,
+        "after": 17
+      },
+      {
+        "offset": 116,
+        "before": 20,
+        "after": 18
+      },
+      {
+        "offset": 120,
+        "before": 176,
+        "after": 96
+      },
+      {
+        "offset": 121,
+        "before": 4,
+        "after": 9
+      },
+      {
+        "offset": 128,
+        "before": 21,
+        "after": 19
+      },
+      {
+        "offset": 144,
+        "before": 176,
+        "after": 96
+      },
+      {
+        "offset": 145,
+        "before": 4,
+        "after": 9
+      },
+      {
+        "offset": 152,
+        "before": 22,
+        "after": 20
+      },
+      {
+        "offset": 164,
+        "before": 23,
+        "after": 21
+      },
+      {
+        "offset": 168,
+        "before": 88,
+        "after": 176
+      },
+      {
+        "offset": 169,
+        "before": 2,
+        "after": 4
+      },
+      {
+        "offset": 173,
+        "before": 0,
+        "after": 2
+      },
+      {
+        "offset": 176,
+        "before": 24,
+        "after": 22
+      },
+      {
+        "offset": 180,
+        "before": 176,
+        "after": 244
+      },
+      {
+        "offset": 181,
+        "before": 4,
+        "after": 1
+      },
+      {
+        "offset": 183,
+        "before": 255,
+        "after": 0
+      },
+      {
+        "offset": 184,
+        "before": 255,
+        "after": 0
+      },
+      {
+        "offset": 186,
+        "before": 0,
+        "after": 1
+      },
+      {
+        "offset": 187,
+        "before": 48,
+        "after": 16
+      },
+      {
+        "offset": 188,
+        "before": 25,
+        "after": 0
+      },
+      {
+        "offset": 192,
+        "before": 194,
+        "after": 244
+      },
+      {
+        "offset": 199,
+        "before": 16,
+        "after": 17
+      },
+      {
+        "offset": 200,
+        "before": 0,
+        "after": 1
+      },
+      {
+        "offset": 204,
+        "before": 194,
+        "after": 88
+      },
+      {
+        "offset": 205,
+        "before": 1,
+        "after": 2
+      },
+      {
+        "offset": 211,
+        "before": 17,
+        "after": 18
+      },
+      {
+        "offset": 212,
+        "before": 1,
+        "after": 2
+      },
+      {
+        "offset": 216,
+        "before": 88,
+        "after": 76
+      },
+      {
+        "offset": 217,
+        "before": 2,
+        "after": 4
+      },
+      {
+        "offset": 223,
+        "before": 18,
+        "after": 19
+      },
+      {
+        "offset": 224,
+        "before": 2,
+        "after": 3
+      },
+      {
+        "offset": 228,
+        "before": 76,
+        "after": 88
+      },
+      {
+        "offset": 229,
+        "before": 4,
+        "after": 2
+      },
+      {
+        "offset": 235,
+        "before": 19,
+        "after": 20
+      },
+      {
+        "offset": 236,
+        "before": 3,
+        "after": 4
+      },
+      {
+        "offset": 247,
+        "before": 20,
+        "after": 21
+      },
+      {
+        "offset": 248,
+        "before": 4,
+        "after": 5
+      },
+      {
+        "offset": 252,
+        "before": 88,
+        "after": 76
+      },
+      {
+        "offset": 253,
+        "before": 2,
+        "after": 4
+      },
+      {
+        "offset": 257,
+        "before": 0,
+        "after": 8
+      },
+      {
+        "offset": 259,
+        "before": 21,
+        "after": 22
+      },
+      {
+        "offset": 260,
+        "before": 5,
+        "after": 6
+      },
+      {
+        "offset": 264,
+        "before": 8,
+        "after": 88
+      },
+      {
+        "offset": 265,
+        "before": 7,
+        "after": 2
+      },
+      {
+        "offset": 271,
+        "before": 22,
+        "after": 23
+      },
+      {
+        "offset": 272,
+        "before": 6,
+        "after": 7
+      },
+      {
+        "offset": 283,
+        "before": 23,
+        "after": 24
+      },
+      {
+        "offset": 284,
+        "before": 7,
+        "after": 8
+      },
+      {
+        "offset": 288,
+        "before": 88,
+        "after": 0
+      },
+      {
+        "offset": 289,
+        "before": 2,
+        "after": 0
+      },
+      {
+        "offset": 290,
+        "before": 5,
+        "after": 0
+      },
+      {
+        "offset": 294,
+        "before": 1,
+        "after": 0
+      },
+      {
+        "offset": 295,
+        "before": 24,
+        "after": 0
+      },
+      {
+        "offset": 296,
+        "before": 8,
+        "after": 24
+      },
+      {
+        "offset": 308,
+        "before": 31,
+        "after": 25
+      },
+      {
+        "offset": 320,
+        "before": 32,
+        "after": 26
+      },
+      {
+        "offset": 332,
+        "before": 33,
+        "after": 27
+      },
+      {
+        "offset": 344,
+        "before": 35,
+        "after": 14
+      },
+      {
+        "offset": 346,
+        "before": 1,
+        "after": 14
+      },
+      {
+        "offset": 356,
+        "before": 26,
+        "after": 0
+      },
+      {
+        "offset": 357,
+        "before": 3,
+        "after": 0
+      },
+      {
+        "offset": 358,
+        "before": 1,
+        "after": 0
+      },
+      {
+        "offset": 360,
+        "before": 136,
+        "after": 0
+      },
+      {
+        "offset": 361,
+        "before": 19,
+        "after": 0
+      },
+      {
+        "offset": 362,
+        "before": 50,
+        "after": 0
+      },
+      {
+        "offset": 363,
+        "before": 31,
+        "after": 0
+      },
+      {
+        "offset": 364,
+        "before": 31,
+        "after": 0
+      },
+      {
+        "offset": 367,
+        "before": 54,
+        "after": 0
+      },
+      {
+        "offset": 368,
+        "before": 27,
+        "after": 0
+      },
+      {
+        "offset": 369,
+        "before": 3,
+        "after": 0
+      },
+      {
+        "offset": 370,
+        "before": 1,
+        "after": 0
+      },
+      {
+        "offset": 372,
+        "before": 136,
+        "after": 0
+      },
+      {
+        "offset": 373,
+        "before": 19,
+        "after": 0
+      },
+      {
+        "offset": 374,
+        "before": 50,
+        "after": 0
+      },
+      {
+        "offset": 375,
+        "before": 31,
+        "after": 0
+      },
+      {
+        "offset": 376,
+        "before": 31,
+        "after": 0
+      },
+      {
+        "offset": 379,
+        "before": 50,
+        "after": 0
+      },
+      {
+        "offset": 380,
+        "before": 28,
+        "after": 0
+      },
+      {
+        "offset": 381,
+        "before": 3,
+        "after": 0
+      },
+      {
+        "offset": 382,
+        "before": 1,
+        "after": 0
+      },
+      {
+        "offset": 392,
+        "before": 16,
+        "after": 0
+      },
+      {
+        "offset": 393,
+        "before": 3,
+        "after": 0
+      },
+      {
+        "offset": 394,
+        "before": 14,
+        "after": 0
+      }
+    ]
+  }
+}
