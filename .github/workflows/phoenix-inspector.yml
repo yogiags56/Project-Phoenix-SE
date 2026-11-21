@@ -6,6 +6,7 @@ on:
       - "tools/phoenix-inspector/**"
       - "tools/phoenix-img4/**"
       - "tools/phoenix-fdt/**"
+      - "tools/phoenix-macho/**"
       - ".github/workflows/phoenix-inspector.yml"
   pull_request:
     paths:
@@ -30,8 +31,12 @@ jobs:
       - name: Test Phoenix FDT Analyzer
         working-directory: tools/phoenix-fdt
         run: python -m unittest discover -s tests -v
+      - name: Test Phoenix Mach-O Analyzer
+        working-directory: tools/phoenix-macho
+        run: python -m unittest discover -s tests -v
       - name: Check tool help
         run: |
           python tools/phoenix-inspector/phoenix_inspector.py --help
           python tools/phoenix-img4/phoenix_img4.py --help
           python tools/phoenix-fdt/phoenix_fdt.py --help
+          python tools/phoenix-macho/phoenix_macho.py --help
