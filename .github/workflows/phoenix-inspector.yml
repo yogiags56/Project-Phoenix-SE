@@ -17,6 +17,7 @@ on:
       - "tools/phoenix-kernel-graph/**"
       - "tools/phoenix-dashboard/**"
       - "tools/phoenix-pmu-catalog/**"
+      - "tools/phoenix-pmu-semantic/**"
       - "tools/phoenix-patch-patterns/**"
       - "tools/phoenix-arm64-disasm/**"
       - "tools/phoenix-pmu-catalog/**"
@@ -98,6 +99,9 @@ jobs:
       - name: Test Phoenix PMU Signature Catalog
         working-directory: tools/phoenix-pmu-catalog
         run: python -m unittest discover -s tests -v
+      - name: Test Phoenix PMU ARM64 Semantic Decoder
+        working-directory: tools/phoenix-pmu-semantic
+        run: python -m unittest discover -s tests -v
       - name: Check tool help
         run: |
           python tools/phoenix-inspector/phoenix_inspector.py --help
@@ -116,4 +120,5 @@ jobs:
           python tools/phoenix-patch-patterns/phoenix_patch_patterns.py --help
           python tools/phoenix-arm64-disasm/phoenix_arm64_disasm.py --help
           python tools/phoenix-pmu-catalog/phoenix_pmu_catalog.py --help
+          python tools/phoenix-pmu-semantic/phoenix_pmu_semantic.py --help
           python -m json.tool profiles/iphone-se-1st-gen.template.json > /dev/null
