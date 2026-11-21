@@ -8,6 +8,7 @@ on:
       - "tools/phoenix-fdt/**"
       - "tools/phoenix-macho/**"
       - "tools/phoenix-kc/**"
+      - "tools/phoenix-kext/**"
       - ".github/workflows/phoenix-inspector.yml"
   pull_request:
     paths:
@@ -38,6 +39,9 @@ jobs:
       - name: Test Phoenix Kernel Collection Inspector
         working-directory: tools/phoenix-kc
         run: python -m unittest discover -s tests -v
+      - name: Test Phoenix Kext Dependency Analyzer
+        working-directory: tools/phoenix-kext
+        run: python -m unittest discover -s tests -v
       - name: Check tool help
         run: |
           python tools/phoenix-inspector/phoenix_inspector.py --help
@@ -45,3 +49,4 @@ jobs:
           python tools/phoenix-fdt/phoenix_fdt.py --help
           python tools/phoenix-macho/phoenix_macho.py --help
           python tools/phoenix-kc/phoenix_kc.py --help
+          python tools/phoenix-kext/phoenix_kext.py --help
