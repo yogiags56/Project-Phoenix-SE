@@ -15,6 +15,7 @@ on:
       - "tools/phoenix-kernel-compat/**"
       - "tools/phoenix-symbol-diff/**"
       - "tools/phoenix-kernel-graph/**"
+      - "tools/phoenix-dashboard/**"
       - ".github/workflows/phoenix-inspector.yml"
   pull_request:
     paths:
@@ -75,6 +76,9 @@ jobs:
       - name: Test Phoenix Kernel Dependency Graph
         working-directory: tools/phoenix-kernel-graph
         run: python -m unittest discover -s tests -v
+      - name: Test Phoenix Evidence Dashboard
+        working-directory: tools/phoenix-dashboard
+        run: python -m unittest discover -s tests -v
       - name: Check tool help
         run: |
           python tools/phoenix-inspector/phoenix_inspector.py --help
@@ -89,4 +93,5 @@ jobs:
           python tools/phoenix-kernel-compat/phoenix_kernel_compat.py --help
           python tools/phoenix-symbol-diff/phoenix_symbol_diff.py --help
           python tools/phoenix-kernel-graph/phoenix_kernel_graph.py --help
+          python tools/phoenix-dashboard/phoenix_dashboard.py --help
           python -m json.tool profiles/iphone-se-1st-gen.template.json > /dev/null
