@@ -2,10 +2,6 @@ name: Phoenix Firmware Tools CI
 
 on:
   push:
-      - "tools/phoenix-kernel-graph/**"
-      - "tools/phoenix-dashboard/**"
-      - "docs/research/**"
-      - "README.md"
     paths:
       - "tools/phoenix-inspector/**"
       - "tools/phoenix-img4/**"
@@ -20,12 +16,10 @@ on:
       - "tools/phoenix-symbol-diff/**"
       - "tools/phoenix-kernel-graph/**"
       - "tools/phoenix-dashboard/**"
+      - "docs/research/**"
+      - "README.md"
       - ".github/workflows/phoenix-inspector.yml"
   pull_request:
-      - "tools/phoenix-kernel-graph/**"
-      - "tools/phoenix-dashboard/**"
-      - "docs/research/**"
-      - "README.md"
     paths:
       - "tools/phoenix-inspector/**"
       - "tools/phoenix-img4/**"
@@ -38,6 +32,10 @@ on:
       - "tools/phoenix-dt-diff/**"
       - "tools/phoenix-kernel-compat/**"
       - "tools/phoenix-symbol-diff/**"
+      - "tools/phoenix-kernel-graph/**"
+      - "tools/phoenix-dashboard/**"
+      - "docs/research/**"
+      - "README.md"
       - ".github/workflows/phoenix-inspector.yml"
 
 jobs:
