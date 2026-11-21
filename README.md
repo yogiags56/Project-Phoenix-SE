@@ -65,7 +65,9 @@ That work is a reference for understanding firmware composition and compatibilit
 - [x] Add an evidence-labelled kernel dependency graph with optional Kernel Collection correlation and explicit symbol-provider mappings.
 - [x] Add a read-only HTML/JSON evidence dashboard for aggregating analyzer reports.
 - [x] Add a lexical patch-pattern inventory for C patcher sources, with source hashes and mutation-site references.
+- [x] Add a textual ARM64 disassembly analyzer with branch/ADRP heuristics and address-aligned before/after diff.
 - [ ] Investigate A9 kernel support and required low-level interfaces.
+- [ ] Validate ARM64 patch semantics against original binaries, relocations, and hardware-specific context.
 - [x] Add a static inventory tool for patcher signature arrays and mutation call sites.
 - [ ] Investigate graphics, display, touch, audio, camera, and wireless drivers.
 - [ ] Investigate SEP, baseband, boot chain, and restore compatibility.
