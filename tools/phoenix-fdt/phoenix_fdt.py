@@ -24,7 +24,7 @@ def align4(value):
 def c_string(data, start, limit):
     if start < 0 or start >= limit:
         raise FDTError("String offset outside block")
-    end=data.find(b"\\x00", start, limit)
+    end=data.find(b"\x00", start, limit)
     if end < 0:
         raise FDTError("Unterminated string")
     try:
@@ -38,9 +38,9 @@ def decode_property(raw):
     if not raw:
         result.update(kind="boolean",value=True)
         return result
-    if raw.endswith(b"\\x00"):
+    if raw.endswith(b"\x00"):
         try:
-            values=[x.decode("utf-8") for x in raw[:-1].split(b"\\x00")]
+            values=[x.decode("utf-8") for x in raw[:-1].split(b"\x00")]
             if all(all(ch.isprintable() for ch in x) for x in values):
                 result.update(kind="string_list" if len(values)>1 else "string",
                               value=values if len(values)>1 else values[0])
@@ -160,7 +160,7 @@ def main(argv=None):
     try:
         report=parse_fdt(a.input.read_bytes(),a.input.name)
         a.out.parent.mkdir(parents=True,exist_ok=True)
-        a.out.write_text(json.dumps(report,indent=2)+"\\n",encoding="utf-8")
+        a.out.write_text(json.dumps(report,indent=2)+"\n",encoding="utf-8")
         print("FDT nodes:",report["summary"]["node_count"])
         print("Properties:",report["summary"]["property_count"])
         print("Report written:",a.out)
