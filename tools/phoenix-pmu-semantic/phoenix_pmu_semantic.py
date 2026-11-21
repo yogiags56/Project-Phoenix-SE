@@ -120,7 +120,7 @@ def analyze(catalog: dict) -> dict:
         out.append(record)
         for d in decoded:
             counts[d["class"]]=counts.get(d["class"],0)+1
-        if replacement:counts[replacement["class"]]=counts.get(replacement["class"],0)+1
+        if placeholder:counts[placeholder["class"]]=counts.get(placeholder["class"],0)+1
     # The upstream C patcher overwrites four static table placeholders with
     # address-dependent branch instructions in prepare_jumps().
     dynamic={}
