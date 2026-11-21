@@ -22,6 +22,7 @@ on:
       - "tools/phoenix-arm64-disasm/**"
       - "tools/phoenix-pmu-catalog/**"
       - "docs/research/**"
+      - "research/**"
       - "README.md"
       - ".github/workflows/phoenix-inspector.yml"
   pull_request:
@@ -40,6 +41,7 @@ on:
       - "tools/phoenix-kernel-graph/**"
       - "tools/phoenix-dashboard/**"
       - "docs/research/**"
+      - "research/**"
       - "README.md"
       - ".github/workflows/phoenix-inspector.yml"
 
