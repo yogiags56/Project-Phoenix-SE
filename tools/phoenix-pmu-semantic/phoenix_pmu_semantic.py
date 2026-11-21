@@ -80,16 +80,20 @@ def decode(word: int) -> dict:
         rd=w&31;rn=(w>>5)&31;rm=(w>>16)&31
         return {"class":"variable-shift","mnemonic":names[base],"operands":[reg(rd,sf),reg(rn,sf),reg(rm,sf)],"meaning":"Variable shift using register amount"}
     # Load/store unsigned immediate (integer scalar).
+    # size selects access width; opc selects store/load/sign-extending form.
     if (w & 0x3b000000) == 0x39000000:
         size=(w>>30)&3;opc=(w>>22)&3;imm=(w>>10)&0xfff;rn=(w>>5)&31;rt=w&31
-        scale=1<<size;offset=imm*scale
-        loads={1:"ldrb",2:"ldrh",3:"ldr"};stores={0:"strb",1:"strh",2:"str",3:"str"}
-        if opc in loads:
-            m=loads[opc];sf=1 if size==3 else 0
-            return {"class":"load-store","mnemonic":m,"operands":[reg(rt,sf),f"[{reg(rn,1,True)}, #{offset:#x}]"],"meaning":"Unsigned-immediate load","memory_offset":offset}
-        if opc==0 or opc==2:
-            m=stores[opc];sf=1 if size==3 else 0
-            return {"class":"load-store","mnemonic":m,"operands":[reg(rt,sf),f"[{reg(rn,1,True)}, #{offset:#x}]"],"meaning":"Unsigned-immediate store","memory_offset":offset}
+        offset=imm*(1<<size)
+        if opc in (0,1):
+            is_load=(opc==1)
+            names={0:("strb","ldrb"),1:("strh","ldrh"),2:("str","ldr"),3:("str","ldr")}
+            mnemonic=names[size][1 if is_load else 0]
+            # Byte/halfword/word transfers use W registers; 64-bit uses X.
+            sf=1 if size==3 else 0
+            return {"class":"load-store","mnemonic":mnemonic,
+                    "operands":[reg(rt,sf),f"[{reg(rn,1,True)}, #{offset:#x}]"],
+                    "meaning":"Unsigned-immediate load" if is_load else "Unsigned-immediate store",
+                    "memory_offset":offset,"access_size_bytes":1<<size}
     # Register-indirect branch family.
     if (w & 0xfffffc1f) in (0xd61f0000,0xd63f0000,0xd65f0000):
         base=w&0xfffffc1f;rn=(w>>5)&31
