@@ -45,6 +45,7 @@ That work is a reference for understanding firmware composition and compatibilit
 - [x] Create the Project Phoenix SE repository.
 - [x] Establish the project scope and research-first approach.
 - [ ] Record exact device model, board identifier, firmware versions, and boot state.
+- [x] Add an evidence-validated A9 platform profile template and report generator.
 - [ ] Add a research log and source register.
 
 ### Phase 1 — Reference implementation audit
@@ -56,7 +57,8 @@ That work is a reference for understanding firmware composition and compatibilit
 ### Phase 2 — Hardware and software compatibility study
 - [x] Add read-only firmware metadata analyzers (IMG4, FDT, Mach-O, MH_FILESET, and kext dependency inventory).
 - [x] Add conservative JSON evidence comparison for target and donor reports.
-- [ ] Create a component-by-component hardware compatibility matrix.
+- [x] Create a component-by-component hardware compatibility matrix.
+- [x] Add a structured A9 subsystem evidence profile and readiness report tool.
 - [ ] Investigate A9 kernel support and required low-level interfaces.
 - [ ] Investigate graphics, display, touch, audio, camera, and wireless drivers.
 - [ ] Investigate SEP, baseband, boot chain, and restore compatibility.
@@ -120,6 +122,8 @@ The repository will grow as the research becomes reproducible:
     │   ├── firmware/
     │   ├── kernel/
     │   └── userspace/
+    ├── profiles/
+    │   └── iphone-se-1st-gen.template.json
     ├── tools/
     │   ├── phoenix-inspector/
     │   ├── phoenix-img4/
@@ -127,7 +131,8 @@ The repository will grow as the research becomes reproducible:
     │   ├── phoenix-macho/
     │   ├── phoenix-kc/
     │   ├── phoenix-kext/
-    │   └── phoenix-compat/
+    │   ├── phoenix-compat/
+    │   └── phoenix-a9-profile/
     └── logs/
 
 Only add scripts and binaries when their purpose, provenance, and usage can be documented.
