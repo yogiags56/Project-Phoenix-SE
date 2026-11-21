@@ -34,6 +34,11 @@ That work is a reference for understanding firmware composition and compatibilit
 
 - [PMU reference audit](research/PMU-REFERENCE-AUDIT.md) — static audit of the iOS 16.1 D2365-to-D2255 PMU patcher. Documents 70 rule entries, LDO control-flow redirects, personality changes, the sample guard, assumptions, and evidence still required. This is not hardware validation.
 
+## Latest PMU artifacts
+
+- [PMU signature catalog](research/PMU-SIGNATURE-CATALOG.json) — exact source-derived signature words/masks, 70 rule records, four branch redirect relationships, and byte-level LDO table differences. It is an inventory, not a hardware compatibility result.
+- [PMU catalog extractor](tools/phoenix-pmu-catalog/) — reproducible Python extractor and unit tests.
+
 ## Research objectives
 
 1. Understand the original iPhone SE boot chain, firmware layout, kernel, device tree, and restore process.
@@ -71,6 +76,7 @@ That work is a reference for understanding firmware composition and compatibilit
 - [x] Add a lexical patch-pattern inventory for C patcher sources, with source hashes and mutation-site references.
 - [x] Add a textual ARM64 disassembly analyzer with branch/ADRP heuristics and address-aligned before/after diff.
 - [x] Audit the reference iOS 16.1 PMU patcher and document source-derived rule groups, assumptions, and validation gaps.
+- [x] Extract all 70 PMU signatures, masks, mutation metadata, branch redirect relationships, and LDO descriptor byte differences into a provenance-pinned catalog.
 - [ ] Investigate A9 kernel support and required low-level interfaces.
 - [ ] Validate ARM64 patch semantics against original binaries, relocations, and hardware-specific context.
 - [x] Add a static inventory tool for patcher signature arrays and mutation call sites.
