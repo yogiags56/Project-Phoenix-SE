@@ -49,10 +49,10 @@ That work is a reference for understanding firmware composition and compatibilit
 - [ ] Add a research log and source register.
 
 ### Phase 1 — Reference implementation audit
-- [ ] Review the iOS 16.1 build scripts and patching tools.
-- [ ] Identify every donor IPSW component and why it is used.
-- [ ] Document kernel, SEP, Cryptex, dyld shared cache, restore ramdisk, and firmware changes.
-- [ ] Separate confirmed working features from untested or non-working features.
+- [x] Review the iOS 16.1 build scripts and patching tools (static source audit).
+- [x] Identify donor IPSW components and their observed roles in the build script.
+- [x] Document kernel, SEP, Cryptex, dyld shared cache, restore ramdisk, iBoot, and firmware changes.
+- [x] Separate author-reported working, non-working, and untested features from Phoenix test results.
 
 ### Phase 2 — Hardware and software compatibility study
 - [x] Add read-only firmware metadata analyzers (IMG4, FDT, Mach-O, MH_FILESET, and kext dependency inventory).
@@ -122,6 +122,7 @@ The repository will grow as the research becomes reproducible:
     │   ├── architecture/
     │   ├── compatibility/
     │   ├── research/
+    │   │   └── REFERENCE_IMPLEMENTATION_MAP.md
     │   └── testing/
     ├── research/
     │   ├── firmware/
