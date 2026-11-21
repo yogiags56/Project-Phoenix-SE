@@ -32,12 +32,20 @@ def analyze(label,path):
     raw=path.read_bytes(); src=raw.decode("utf-8"); code=clean_comments(src); arrays=[]
     for m in ARRAY.finditer(code):
         op=code.find("{",m.start()); end=close_brace(code,op); typ=m.group("type"); name=m.group("name"); words=[]
-        for ent in code[op+1:end].split(","):
-            ns=NUM.findall(ent)
-            if not ns: continue
-            v=[int(re.sub(r"[uUlL]+$","",x),0) for x in ns]
-            if typ in ("Word","Pattern") and len(v)>=2: words.append({"value":v[0],"mask":v[1]})
-            elif typ in ("uint32_t","uint64_t"): words.append({"value":v[0],"mask":None})
+        body=code[op+1:end]
+        if typ in ("Word","Pattern"):
+            entries=re.findall(r"\\{([^{}]*)\\}",body)
+            for ent in entries:
+                ns=NUM.findall(ent)
+                if len(ns)<2: continue
+                v=[int(re.sub(r"[uUlL]+$","",x),0) for x in ns]
+                words.append({"value":v[0],"mask":v[1]})
+        else:
+            for ent in body.split(","):
+                ns=NUM.findall(ent)
+                if not ns: continue
+                v=int(re.sub(r"[uUlL]+$","",ns[0]),0)
+                words.append({"value":v,"mask":None})
         if not words: continue
         uses=[ln(src,h.start()) for h in re.finditer(r"\b"+re.escape(name)+r"\b",code) if not m.start()<=h.start()<=m.end()]
         sig=typ in ("Word","Pattern"); exact=sum(w["mask"]==0xffffffff for w in words) if sig else 0
