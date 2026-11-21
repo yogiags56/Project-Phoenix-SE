@@ -34,7 +34,7 @@ def analyze(label,path):
         op=code.find("{",m.start()); end=close_brace(code,op); typ=m.group("type"); name=m.group("name"); words=[]
         body=code[op+1:end]
         if typ in ("Word","Pattern"):
-            entries=re.findall(r"\\{([^{}]*)\\}",body)
+            entries=re.findall(r"\{([^{}]*)\}",body)
             for ent in entries:
                 ns=NUM.findall(ent)
                 if len(ns)<2: continue
