@@ -5,6 +5,7 @@ on:
     paths:
       - "tools/phoenix-inspector/**"
       - "tools/phoenix-img4/**"
+      - "tools/phoenix-fdt/**"
       - ".github/workflows/phoenix-inspector.yml"
   pull_request:
     paths:
