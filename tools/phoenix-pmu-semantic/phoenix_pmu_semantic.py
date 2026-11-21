@@ -73,6 +73,12 @@ def decode(word: int) -> dict:
             if opc==1 and rn==31:m="mov";ops=[reg(rd,sf),reg(rm,sf)]
             if opc==3 and rd==31:m="tst";ops=[reg(rn,sf),reg(rm,sf)]
             return {"class":"logical-register","mnemonic":m,"operands":ops,"meaning":"Logical register operation"}
+    # Variable shifts (LSLV, LSRV, ASRV, RORV).
+    if (w & 0x7fe0fc00) in (0x1ac02000,0x1ac02400,0x1ac02800,0x1ac02c00):
+        sf=(w>>31)&1; base=w&0x7fe0fc00
+        names={0x1ac02000:"lslv",0x1ac02400:"lsrv",0x1ac02800:"asrv",0x1ac02c00:"rorv"}
+        rd=w&31;rn=(w>>5)&31;rm=(w>>16)&31
+        return {"class":"variable-shift","mnemonic":names[base],"operands":[reg(rd,sf),reg(rn,sf),reg(rm,sf)],"meaning":"Variable shift using register amount"}
     # Load/store unsigned immediate (integer scalar).
     if (w & 0x3b000000) == 0x39000000:
         size=(w>>30)&3;opc=(w>>22)&3;imm=(w>>10)&0xfff;rn=(w>>5)&31;rt=w&31
@@ -104,30 +110,65 @@ def analyze(catalog: dict) -> dict:
             decoded.append(d)
         pi=rule["patch_word_index"]
         original=decoded[pi] if 0<=pi<len(decoded) else None
-        replacement=decode(int(rule["replacement_word"],16))
-        replacement.update({"word":rule["replacement_word"],"fully_constrained":True})
+        placeholder=decode(int(rule["replacement_word"],16))
+        placeholder.update({"word":rule["replacement_word"],"fully_constrained":True})
         if not rule["change"]:
-            replacement=None
+            placeholder=None
         record={"index":rule["index"],"name":rule["name"],"mutates":rule["change"],"patch_word_index":pi,
-                "original_patch_instruction":original,"replacement_instruction":replacement,"signature_instructions":decoded}
+                "original_patch_instruction":original,"static_placeholder":placeholder,
+                "replacement_instruction":placeholder,"signature_instructions":decoded}
         out.append(record)
         for d in decoded:
             counts[d["class"]]=counts.get(d["class"],0)+1
         if replacement:counts[replacement["class"]]=counts.get(replacement["class"],0)+1
+    # The upstream C patcher overwrites four static table placeholders with
+    # address-dependent branch instructions in prepare_jumps().
+    dynamic={}
+    for jump in catalog.get("jumps",[]):
+        source=int(jump.get("source_rule",jump.get("source",-1)))
+        target=int(jump.get("target_rule",jump.get("target",-1)))
+        kind=jump.get("branch_kind")
+        if kind is None:
+            kind="tbz" if jump.get("test_bit")==1 else "b"
+        if source<0 or target<0 or source>=len(out) or target>=len(out):
+            raise ValueError("jump redirect references an invalid rule")
+        if kind not in ("b","tbz"):
+            raise ValueError("unsupported dynamic jump kind")
+        target_name=out[target]["name"]
+        if kind=="tbz":
+            actual={"class":"branch","mnemonic":"tbz","operands":["w8","#0",f"<rule {target}: {target_name}>"],
+                    "meaning":"Dynamic test-bit branch; target address is resolved from matched kernel sites",
+                    "branch_encoding":"0x36000008 | (imm14 << 5)","tested_register":"w8","tested_bit":0,
+                    "target_rule":target,"displacement":"(target_found - source_found) / 4"}
+        else:
+            actual={"class":"branch","mnemonic":"b","operands":[f"<rule {target}: {target_name}>"],
+                    "meaning":"Dynamic unconditional branch; target address is resolved from matched kernel sites",
+                    "branch_encoding":"0x14000000 | imm26","target_rule":target,
+                    "displacement":"(target_found - source_found) / 4"}
+        out[source]["static_placeholder_is_not_final"]=True
+        out[source]["replacement_instruction"]=actual
+        out[source]["dynamic_redirect"]={"source_rule":source,"target_rule":target,"branch_kind":kind,
+            "source_rule_name":out[source]["name"],"target_rule_name":target_name,
+            "source_instruction_before_patch":out[source]["original_patch_instruction"],
+            "actual_instruction":actual,
+            "static_table_placeholder":out[source]["static_placeholder"]}
+        dynamic[source]=out[source]["dynamic_redirect"]
     return {"schema_version":1,"artifact":"Phoenix PMU ARM64 semantic decode report",
+
       "provenance":catalog.get("provenance",{}),
       "scope":{"instruction_subset_only":True,"unknown_instructions_preserved":True,"masked_templates_flagged":True,
-        "control_flow_reconstructed":False,"hardware_validation":False,"patch_application":False},
+        "dynamic_jump_redirects_reconstructed":True,"complete_control_flow_reconstructed":False,"hardware_validation":False,"patch_application":False},
       "summary":{"rule_count":len(out),"signature_word_count":sum(len(x["signature_instructions"]) for x in out),
         "mutating_rule_count":sum(x["mutates"] for x in out),
         "unknown_signature_word_count":sum(d["class"]=="unknown" for x in out for d in x["signature_instructions"]),
         "decoded_class_counts":counts},
+      "dynamic_jump_redirects":[out[i]["dynamic_redirect"] for i in sorted(dynamic)],
       "rules":out,
       "limitations":["Only selected AArch64 instruction classes are decoded.","Unknown words are retained without a guessed mnemonic.",
         "Masked signature words are templates; wildcard fields are not concrete instruction operands.",
         "Branch displacements are relative to the instruction address, which is not present in a signature window.",
         "This report does not reconstruct function boundaries, register liveness, flags, memory semantics, or complete control flow.",
-        "A decoded replacement does not prove the patch is correct or compatible with another kernel build."]}
+        "Dynamic branch destinations depend on the exact matched kernel offsets and are not resolved by the catalog alone.","A decoded replacement does not prove the patch is correct or compatible with another kernel build."]}
 
 def main():
     p=argparse.ArgumentParser(description=__doc__)
