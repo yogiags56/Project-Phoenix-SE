@@ -55,6 +55,7 @@ That work is a reference for understanding firmware composition and compatibilit
 
 ### Phase 2 — Hardware and software compatibility study
 - [x] Add read-only firmware metadata analyzers (IMG4, FDT, Mach-O, MH_FILESET, and kext dependency inventory).
+- [x] Add conservative JSON evidence comparison for target and donor reports.
 - [ ] Create a component-by-component hardware compatibility matrix.
 - [ ] Investigate A9 kernel support and required low-level interfaces.
 - [ ] Investigate graphics, display, touch, audio, camera, and wireless drivers.
@@ -125,7 +126,8 @@ The repository will grow as the research becomes reproducible:
     │   ├── phoenix-fdt/
     │   ├── phoenix-macho/
     │   ├── phoenix-kc/
-    │   └── phoenix-kext/
+    │   ├── phoenix-kext/
+    │   └── phoenix-compat/
     └── logs/
 
 Only add scripts and binaries when their purpose, provenance, and usage can be documented.
