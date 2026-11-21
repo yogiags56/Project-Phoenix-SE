@@ -14,21 +14,25 @@
     "masked_templates_flagged": true,
     "control_flow_reconstructed": false,
     "hardware_validation": false,
-    "patch_application": false
+    "patch_application": false,
+    "dynamic_jump_redirects_reconstructed": true,
+    "complete_control_flow_reconstructed": false
   },
   "summary": {
     "rule_count": 70,
     "signature_word_count": 630,
     "mutating_rule_count": 66,
-    "unknown_signature_word_count": 103,
+    "unknown_signature_word_count": 98,
     "decoded_class_counts": {
       "load-store": 101,
       "logical-register": 69,
-      "unknown": 103,
-      "arithmetic-immediate": 109,
-      "branch": 104,
-      "move-wide-immediate": 112,
-      "address-generation": 32
+      "unknown": 102,
+      "arithmetic-immediate": 128,
+      "branch": 108,
+      "move-wide-immediate": 149,
+      "address-generation": 32,
+      "variable-shift": 6,
+      "hint": 1
     }
   },
   "rules": [
@@ -8906,10 +8910,14 @@
           "fully_constrained": true
         },
         {
-          "class": "unknown",
-          "mnemonic": null,
-          "operands": [],
-          "meaning": "Instruction class not implemented by this conservative decoder",
+          "class": "variable-shift",
+          "mnemonic": "lsrv",
+          "operands": [
+            "x8",
+            "x8",
+            "x26"
+          ],
+          "meaning": "Variable logical right shift using register amount",
           "word_index": 7,
           "word": "0x9ada2508",
           "mask": "0xffffffff",
@@ -9058,10 +9066,14 @@
           "fully_constrained": true
         },
         {
-          "class": "unknown",
-          "mnemonic": null,
-          "operands": [],
-          "meaning": "Instruction class not implemented by this conservative decoder",
+          "class": "variable-shift",
+          "mnemonic": "lsrv",
+          "operands": [
+            "x8",
+            "x8",
+            "x26"
+          ],
+          "meaning": "Variable logical right shift using register amount",
           "word_index": 6,
           "word": "0x9ada2508",
           "mask": "0xffffffff",
@@ -9204,10 +9216,14 @@
           "fully_constrained": true
         },
         {
-          "class": "unknown",
-          "mnemonic": null,
-          "operands": [],
-          "meaning": "Instruction class not implemented by this conservative decoder",
+          "class": "variable-shift",
+          "mnemonic": "lsrv",
+          "operands": [
+            "x8",
+            "x8",
+            "x26"
+          ],
+          "meaning": "Variable logical right shift using register amount",
           "word_index": 5,
           "word": "0x9ada2508",
           "mask": "0xffffffff",
@@ -9316,10 +9332,14 @@
           "fully_constrained": true
         },
         {
-          "class": "unknown",
-          "mnemonic": null,
-          "operands": [],
-          "meaning": "Instruction class not implemented by this conservative decoder",
+          "class": "variable-shift",
+          "mnemonic": "lsrv",
+          "operands": [
+            "x8",
+            "x8",
+            "x26"
+          ],
+          "meaning": "Variable logical right shift using register amount",
           "word_index": 1,
           "word": "0x9ada2508",
           "mask": "0xffffffff",
@@ -9374,10 +9394,14 @@
           "fully_constrained": true
         },
         {
-          "class": "unknown",
-          "mnemonic": null,
-          "operands": [],
-          "meaning": "Instruction class not implemented by this conservative decoder",
+          "class": "variable-shift",
+          "mnemonic": "lsrv",
+          "operands": [
+            "x8",
+            "x8",
+            "x26"
+          ],
+          "meaning": "Variable logical right shift using register amount",
           "word_index": 5,
           "word": "0x9ada2508",
           "mask": "0xffffffff",
@@ -9451,12 +9475,15 @@
         "fully_constrained": false
       },
       "replacement_instruction": {
-        "class": "hint",
-        "mnemonic": "nop",
-        "operands": [],
-        "meaning": "No operation",
-        "word": "0xd503201f",
-        "fully_constrained": true
+        "class": "branch",
+        "mnemonic": "b",
+        "operands": [
+          "<rule 66: LDO main anchor>"
+        ],
+        "meaning": "Dynamic unconditional branch; target address resolved from matched kernel sites",
+        "branch_encoding": "0x14000000 | imm26",
+        "target_rule": 66,
+        "displacement": "(target_found - source_found) / 4"
       },
       "signature_instructions": [
         {
@@ -9578,7 +9605,56 @@
           "mask": "0xffffffff",
           "fully_constrained": true
         }
-      ]
+      ],
+      "static_placeholder": {
+        "class": "hint",
+        "mnemonic": "nop",
+        "operands": [],
+        "meaning": "No operation",
+        "word": "0xd503201f",
+        "fully_constrained": true
+      },
+      "static_placeholder_is_not_final": true,
+      "dynamic_redirect": {
+        "source_rule": 59,
+        "target_rule": 66,
+        "branch_kind": "b",
+        "source_rule_name": "LDO debug entry -> main",
+        "target_rule_name": "LDO main anchor",
+        "source_instruction_before_patch": {
+          "class": "branch",
+          "mnemonic": "cbz",
+          "operands": [
+            "w8",
+            "+0x0"
+          ],
+          "meaning": "Compare register with zero and branch (masked template; wildcard bits are not known)",
+          "branch_displacement": 0,
+          "word_index": 4,
+          "word": "0x34000008",
+          "mask": "0xff00001f",
+          "fully_constrained": false
+        },
+        "actual_instruction": {
+          "class": "branch",
+          "mnemonic": "b",
+          "operands": [
+            "<rule 66: LDO main anchor>"
+          ],
+          "meaning": "Dynamic unconditional branch; target address resolved from matched kernel sites",
+          "branch_encoding": "0x14000000 | imm26",
+          "target_rule": 66,
+          "displacement": "(target_found - source_found) / 4"
+        },
+        "static_table_placeholder": {
+          "class": "hint",
+          "mnemonic": "nop",
+          "operands": [],
+          "meaning": "No operation",
+          "word": "0xd503201f",
+          "fully_constrained": true
+        }
+      }
     },
     {
       "index": 60,
@@ -9601,10 +9677,14 @@
         "fully_constrained": true
       },
       "replacement_instruction": {
-        "class": "unknown",
-        "mnemonic": null,
-        "operands": [],
-        "meaning": "Instruction class not implemented by this conservative decoder",
+        "class": "variable-shift",
+        "mnemonic": "lsrv",
+        "operands": [
+          "x8",
+          "x8",
+          "x26"
+        ],
+        "meaning": "Variable logical right shift using register amount",
         "word": "0x9ada2508",
         "fully_constrained": true
       },
@@ -9749,12 +9829,19 @@
         "fully_constrained": true
       },
       "replacement_instruction": {
-        "class": "hint",
-        "mnemonic": "nop",
-        "operands": [],
-        "meaning": "No operation",
-        "word": "0xd503201f",
-        "fully_constrained": true
+        "class": "branch",
+        "mnemonic": "tbz",
+        "operands": [
+          "w8",
+          "#0",
+          "<rule 67: LDO normal path anchor>"
+        ],
+        "meaning": "Dynamic test-bit branch; target address resolved from matched kernel sites",
+        "branch_encoding": "0x36000008 | (imm14 << 5)",
+        "tested_register": "w8",
+        "tested_bit": 0,
+        "target_rule": 67,
+        "displacement": "(target_found - source_found) / 4"
       },
       "signature_instructions": [
         {
@@ -9873,7 +9960,59 @@
           "mask": "0xffffffff",
           "fully_constrained": true
         }
-      ]
+      ],
+      "static_placeholder": {
+        "class": "hint",
+        "mnemonic": "nop",
+        "operands": [],
+        "meaning": "No operation",
+        "word": "0xd503201f",
+        "fully_constrained": true
+      },
+      "static_placeholder_is_not_final": true,
+      "dynamic_redirect": {
+        "source_rule": 61,
+        "target_rule": 67,
+        "branch_kind": "tbz",
+        "source_rule_name": "LDO alternate-enable false -> normal",
+        "target_rule_name": "LDO normal path anchor",
+        "source_instruction_before_patch": {
+          "class": "logical-register",
+          "mnemonic": "mov",
+          "operands": [
+            "w9",
+            "w23"
+          ],
+          "meaning": "Logical register operation",
+          "word_index": 4,
+          "word": "0x2a1703e9",
+          "mask": "0xffffffff",
+          "fully_constrained": true
+        },
+        "actual_instruction": {
+          "class": "branch",
+          "mnemonic": "tbz",
+          "operands": [
+            "w8",
+            "#0",
+            "<rule 67: LDO normal path anchor>"
+          ],
+          "meaning": "Dynamic test-bit branch; target address resolved from matched kernel sites",
+          "branch_encoding": "0x36000008 | (imm14 << 5)",
+          "tested_register": "w8",
+          "tested_bit": 0,
+          "target_rule": 67,
+          "displacement": "(target_found - source_found) / 4"
+        },
+        "static_table_placeholder": {
+          "class": "hint",
+          "mnemonic": "nop",
+          "operands": [],
+          "meaning": "No operation",
+          "word": "0xd503201f",
+          "fully_constrained": true
+        }
+      }
     },
     {
       "index": 62,
@@ -9894,12 +10033,15 @@
         "fully_constrained": true
       },
       "replacement_instruction": {
-        "class": "hint",
-        "mnemonic": "nop",
-        "operands": [],
-        "meaning": "No operation",
-        "word": "0xd503201f",
-        "fully_constrained": true
+        "class": "branch",
+        "mnemonic": "b",
+        "operands": [
+          "<rule 68: LDO option path anchor>"
+        ],
+        "meaning": "Dynamic unconditional branch; target address resolved from matched kernel sites",
+        "branch_encoding": "0x14000000 | imm26",
+        "target_rule": 68,
+        "displacement": "(target_found - source_found) / 4"
       },
       "signature_instructions": [
         {
@@ -10017,7 +10159,55 @@
           "mask": "0xffffffff",
           "fully_constrained": true
         }
-      ]
+      ],
+      "static_placeholder": {
+        "class": "hint",
+        "mnemonic": "nop",
+        "operands": [],
+        "meaning": "No operation",
+        "word": "0xd503201f",
+        "fully_constrained": true
+      },
+      "static_placeholder_is_not_final": true,
+      "dynamic_redirect": {
+        "source_rule": 62,
+        "target_rule": 68,
+        "branch_kind": "b",
+        "source_rule_name": "LDO alternate-enable true -> option test",
+        "target_rule_name": "LDO option path anchor",
+        "source_instruction_before_patch": {
+          "class": "logical-register",
+          "mnemonic": "mov",
+          "operands": [
+            "w10",
+            "w20"
+          ],
+          "meaning": "Logical register operation",
+          "word_index": 4,
+          "word": "0x2a1403ea",
+          "mask": "0xffffffff",
+          "fully_constrained": true
+        },
+        "actual_instruction": {
+          "class": "branch",
+          "mnemonic": "b",
+          "operands": [
+            "<rule 68: LDO option path anchor>"
+          ],
+          "meaning": "Dynamic unconditional branch; target address resolved from matched kernel sites",
+          "branch_encoding": "0x14000000 | imm26",
+          "target_rule": 68,
+          "displacement": "(target_found - source_found) / 4"
+        },
+        "static_table_placeholder": {
+          "class": "hint",
+          "mnemonic": "nop",
+          "operands": [],
+          "meaning": "No operation",
+          "word": "0xd503201f",
+          "fully_constrained": true
+        }
+      }
     },
     {
       "index": 63,
@@ -10359,12 +10549,15 @@
         "fully_constrained": false
       },
       "replacement_instruction": {
-        "class": "hint",
-        "mnemonic": "nop",
-        "operands": [],
-        "meaning": "No operation",
-        "word": "0xd503201f",
-        "fully_constrained": true
+        "class": "branch",
+        "mnemonic": "b",
+        "operands": [
+          "<rule 60: LDO alternate-enable mask test>"
+        ],
+        "meaning": "Dynamic unconditional branch; target address resolved from matched kernel sites",
+        "branch_encoding": "0x14000000 | imm26",
+        "target_rule": 60,
+        "displacement": "(target_found - source_found) / 4"
       },
       "signature_instructions": [
         {
@@ -10493,7 +10686,56 @@
           "mask": "0xffc003ff",
           "fully_constrained": false
         }
-      ]
+      ],
+      "static_placeholder": {
+        "class": "hint",
+        "mnemonic": "nop",
+        "operands": [],
+        "meaning": "No operation",
+        "word": "0xd503201f",
+        "fully_constrained": true
+      },
+      "static_placeholder_is_not_final": true,
+      "dynamic_redirect": {
+        "source_rule": 65,
+        "target_rule": 60,
+        "branch_kind": "b",
+        "source_rule_name": "LDO gate -> mask test",
+        "target_rule_name": "LDO alternate-enable mask test",
+        "source_instruction_before_patch": {
+          "class": "branch",
+          "mnemonic": "b.ne",
+          "operands": [
+            "+0x0"
+          ],
+          "meaning": "Conditional branch (masked template; wildcard bits are not known)",
+          "branch_displacement": 0,
+          "condition": "ne",
+          "word_index": 4,
+          "word": "0x54000001",
+          "mask": "0xff00001f",
+          "fully_constrained": false
+        },
+        "actual_instruction": {
+          "class": "branch",
+          "mnemonic": "b",
+          "operands": [
+            "<rule 60: LDO alternate-enable mask test>"
+          ],
+          "meaning": "Dynamic unconditional branch; target address resolved from matched kernel sites",
+          "branch_encoding": "0x14000000 | imm26",
+          "target_rule": 60,
+          "displacement": "(target_found - source_found) / 4"
+        },
+        "static_table_placeholder": {
+          "class": "hint",
+          "mnemonic": "nop",
+          "operands": [],
+          "meaning": "No operation",
+          "word": "0xd503201f",
+          "fully_constrained": true
+        }
+      }
     },
     {
       "index": 66,
@@ -11098,6 +11340,171 @@
     "Masked signature words are templates; wildcard fields are not concrete instruction operands.",
     "Branch displacements are relative to the instruction address, which is not present in a signature window.",
     "This report does not reconstruct function boundaries, register liveness, flags, memory semantics, or complete control flow.",
-    "A decoded replacement does not prove the patch is correct or compatible with another kernel build."
+    "A decoded replacement does not prove the patch is correct or compatible with another kernel build.",
+    "Four LDO rule replacements are computed at runtime by prepare_jumps(); the report describes branch kind and rule target but cannot resolve byte displacements without matched kernel offsets."
+  ],
+  "dynamic_jump_redirects": [
+    {
+      "source_rule": 59,
+      "target_rule": 66,
+      "branch_kind": "b",
+      "source_rule_name": "LDO debug entry -> main",
+      "target_rule_name": "LDO main anchor",
+      "source_instruction_before_patch": {
+        "class": "branch",
+        "mnemonic": "cbz",
+        "operands": [
+          "w8",
+          "+0x0"
+        ],
+        "meaning": "Compare register with zero and branch (masked template; wildcard bits are not known)",
+        "branch_displacement": 0,
+        "word_index": 4,
+        "word": "0x34000008",
+        "mask": "0xff00001f",
+        "fully_constrained": false
+      },
+      "actual_instruction": {
+        "class": "branch",
+        "mnemonic": "b",
+        "operands": [
+          "<rule 66: LDO main anchor>"
+        ],
+        "meaning": "Dynamic unconditional branch; target address resolved from matched kernel sites",
+        "branch_encoding": "0x14000000 | imm26",
+        "target_rule": 66,
+        "displacement": "(target_found - source_found) / 4"
+      },
+      "static_table_placeholder": {
+        "class": "hint",
+        "mnemonic": "nop",
+        "operands": [],
+        "meaning": "No operation",
+        "word": "0xd503201f",
+        "fully_constrained": true
+      }
+    },
+    {
+      "source_rule": 61,
+      "target_rule": 67,
+      "branch_kind": "tbz",
+      "source_rule_name": "LDO alternate-enable false -> normal",
+      "target_rule_name": "LDO normal path anchor",
+      "source_instruction_before_patch": {
+        "class": "logical-register",
+        "mnemonic": "mov",
+        "operands": [
+          "w9",
+          "w23"
+        ],
+        "meaning": "Logical register operation",
+        "word_index": 4,
+        "word": "0x2a1703e9",
+        "mask": "0xffffffff",
+        "fully_constrained": true
+      },
+      "actual_instruction": {
+        "class": "branch",
+        "mnemonic": "tbz",
+        "operands": [
+          "w8",
+          "#0",
+          "<rule 67: LDO normal path anchor>"
+        ],
+        "meaning": "Dynamic test-bit branch; target address resolved from matched kernel sites",
+        "branch_encoding": "0x36000008 | (imm14 << 5)",
+        "tested_register": "w8",
+        "tested_bit": 0,
+        "target_rule": 67,
+        "displacement": "(target_found - source_found) / 4"
+      },
+      "static_table_placeholder": {
+        "class": "hint",
+        "mnemonic": "nop",
+        "operands": [],
+        "meaning": "No operation",
+        "word": "0xd503201f",
+        "fully_constrained": true
+      }
+    },
+    {
+      "source_rule": 62,
+      "target_rule": 68,
+      "branch_kind": "b",
+      "source_rule_name": "LDO alternate-enable true -> option test",
+      "target_rule_name": "LDO option path anchor",
+      "source_instruction_before_patch": {
+        "class": "logical-register",
+        "mnemonic": "mov",
+        "operands": [
+          "w10",
+          "w20"
+        ],
+        "meaning": "Logical register operation",
+        "word_index": 4,
+        "word": "0x2a1403ea",
+        "mask": "0xffffffff",
+        "fully_constrained": true
+      },
+      "actual_instruction": {
+        "class": "branch",
+        "mnemonic": "b",
+        "operands": [
+          "<rule 68: LDO option path anchor>"
+        ],
+        "meaning": "Dynamic unconditional branch; target address resolved from matched kernel sites",
+        "branch_encoding": "0x14000000 | imm26",
+        "target_rule": 68,
+        "displacement": "(target_found - source_found) / 4"
+      },
+      "static_table_placeholder": {
+        "class": "hint",
+        "mnemonic": "nop",
+        "operands": [],
+        "meaning": "No operation",
+        "word": "0xd503201f",
+        "fully_constrained": true
+      }
+    },
+    {
+      "source_rule": 65,
+      "target_rule": 60,
+      "branch_kind": "b",
+      "source_rule_name": "LDO gate -> mask test",
+      "target_rule_name": "LDO alternate-enable mask test",
+      "source_instruction_before_patch": {
+        "class": "branch",
+        "mnemonic": "b.ne",
+        "operands": [
+          "+0x0"
+        ],
+        "meaning": "Conditional branch (masked template; wildcard bits are not known)",
+        "branch_displacement": 0,
+        "condition": "ne",
+        "word_index": 4,
+        "word": "0x54000001",
+        "mask": "0xff00001f",
+        "fully_constrained": false
+      },
+      "actual_instruction": {
+        "class": "branch",
+        "mnemonic": "b",
+        "operands": [
+          "<rule 60: LDO alternate-enable mask test>"
+        ],
+        "meaning": "Dynamic unconditional branch; target address resolved from matched kernel sites",
+        "branch_encoding": "0x14000000 | imm26",
+        "target_rule": 60,
+        "displacement": "(target_found - source_found) / 4"
+      },
+      "static_table_placeholder": {
+        "class": "hint",
+        "mnemonic": "nop",
+        "operands": [],
+        "meaning": "No operation",
+        "word": "0xd503201f",
+        "fully_constrained": true
+      }
+    }
   ]
 }
