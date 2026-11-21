@@ -61,6 +61,7 @@ That work is a reference for understanding firmware composition and compatibilit
 - [x] Add a structured A9 subsystem evidence profile and readiness report tool.
 - [x] Add a read-only Device Tree report comparator for node, property, compatible-string and phandle differences.
 - [x] Add a kernel evidence correlator for Mach-O architecture, Kernel Collection architecture and kext inventory reports.
+- [x] Add a read-only symbol-table comparison tool for matching Mach-O architectures.
 - [ ] Investigate A9 kernel support and required low-level interfaces.
 - [ ] Investigate graphics, display, touch, audio, camera, and wireless drivers.
 - [ ] Investigate SEP, baseband, boot chain, and restore compatibility.
@@ -136,7 +137,8 @@ The repository will grow as the research becomes reproducible:
     │   ├── phoenix-compat/
     │   ├── phoenix-a9-profile/
     │   ├── phoenix-dt-diff/
-    │   └── phoenix-kernel-compat/
+    │   ├── phoenix-kernel-compat/
+    │   └── phoenix-symbol-diff/
     └── logs/
 
 Only add scripts and binaries when their purpose, provenance, and usage can be documented.
