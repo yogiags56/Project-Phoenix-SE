@@ -10,7 +10,7 @@ NUM=re.compile(r"(?<![\w])(?:0[xX][0-9a-fA-F]+|\d+)[uUlL]*")
 FUNC=re.compile(r"(?m)^[ \t]*(?:static\s+)?(?:void|int|bool|size_t|uint\w*_t|long|char\s*\*)\s+([A-Za-z_]\w*)\s*\([^;{}]*\)\s*\{")
 MUT=re.compile(r"\b(edit|patch|write|put(?:8|16|32|64)|memcpy|memmove|memset|w32|write_u32|write32|replace|apply_patch)\s*\(")
 def clean_comments(s):
-    rx=re.compile(r"(\"(?:\\\\.|[^\"\\\\])*\"|'(?:\\\\.|[^'\\\\])*'|//[^\\n]*|/\\*[\\s\\S]*?\\*/)")
+    rx=re.compile(r"(\"(?:\\.|[^\"\\])*\"|'(?:\\.|[^'\\])*'|//[^\n]*|/\*[\s\S]*?\*/)")
     a=list(s)
     for m in rx.finditer(s):
         if m.group().startswith(('"',"'")): continue
