@@ -24,7 +24,8 @@ jobs:
         working-directory: tools/phoenix-inspector
         run: python -m unittest discover -s tests -v
       - name: Test Phoenix IMG4 Parser
-        run: python -m unittest discover -s tools/phoenix-img4/tests -v
+        working-directory: tools/phoenix-img4
+        run: python -m unittest discover -s tests -v
       - name: Check tool help
         run: |
           python tools/phoenix-inspector/phoenix_inspector.py --help
