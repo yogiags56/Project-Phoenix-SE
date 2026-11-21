@@ -1,8 +1,7 @@
 name: Phoenix Firmware Tools CI
 
 on:
-  push:      - "tools/phoenix-symbol-diff/**"
-
+  push:
     paths:
       - "tools/phoenix-inspector/**"
       - "tools/phoenix-img4/**"
@@ -14,9 +13,9 @@ on:
       - "tools/phoenix-a9-profile/**"
       - "tools/phoenix-dt-diff/**"
       - "tools/phoenix-kernel-compat/**"
+      - "tools/phoenix-symbol-diff/**"
       - ".github/workflows/phoenix-inspector.yml"
-  pull_request:      - "tools/phoenix-symbol-diff/**"
-
+  pull_request:
     paths:
       - "tools/phoenix-inspector/**"
       - "tools/phoenix-img4/**"
@@ -26,6 +25,9 @@ on:
       - "tools/phoenix-kext/**"
       - "tools/phoenix-compat/**"
       - "tools/phoenix-a9-profile/**"
+      - "tools/phoenix-dt-diff/**"
+      - "tools/phoenix-kernel-compat/**"
+      - "tools/phoenix-symbol-diff/**"
       - ".github/workflows/phoenix-inspector.yml"
 
 jobs:
