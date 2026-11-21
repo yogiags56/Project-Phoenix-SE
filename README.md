@@ -121,7 +121,8 @@ The repository will grow as the research becomes reproducible:
     ├── tools/
     │   ├── phoenix-inspector/
     │   ├── phoenix-img4/
-    │   └── phoenix-fdt/
+    │   ├── phoenix-fdt/
+    │   └── phoenix-macho/
     └── logs/
 
 Only add scripts and binaries when their purpose, provenance, and usage can be documented.
