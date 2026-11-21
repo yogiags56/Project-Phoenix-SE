@@ -1,0 +1,131 @@
+{
+  "schema_version": 1,
+  "profile_type": "phoenix-a9-platform-profile",
+  "device": {
+    "name": "iPhone SE (1st generation) — target profile template",
+    "identity": {
+      "product_type": null,
+      "board_variant": null,
+      "soc_variant": null,
+      "model_number": null,
+      "firmware_build": null
+    },
+    "identity_note": "Populate from trusted diagnostics and exact IPSW BuildManifest. Null means not yet recorded."
+  },
+  "subsystems": {
+    "boot_chain_restore": {
+      "status": "not_assessed",
+      "evidence_level": "none",
+      "evidence": [],
+      "notes": "No Phoenix device-level validation recorded."
+    },
+    "kernel_device_tree": {
+      "status": "not_assessed",
+      "evidence_level": "none",
+      "evidence": [],
+      "notes": "No Phoenix device-level validation recorded."
+    },
+    "cpu_arm64": {
+      "status": "not_assessed",
+      "evidence_level": "none",
+      "evidence": [],
+      "notes": "No Phoenix device-level validation recorded."
+    },
+    "gpu_metal": {
+      "status": "not_assessed",
+      "evidence_level": "none",
+      "evidence": [],
+      "notes": "No Phoenix device-level validation recorded."
+    },
+    "display": {
+      "status": "not_assessed",
+      "evidence_level": "none",
+      "evidence": [],
+      "notes": "No Phoenix device-level validation recorded."
+    },
+    "touch": {
+      "status": "not_assessed",
+      "evidence_level": "none",
+      "evidence": [],
+      "notes": "No Phoenix device-level validation recorded."
+    },
+    "audio": {
+      "status": "not_assessed",
+      "evidence_level": "none",
+      "evidence": [],
+      "notes": "No Phoenix device-level validation recorded."
+    },
+    "camera_isp": {
+      "status": "not_assessed",
+      "evidence_level": "none",
+      "evidence": [],
+      "notes": "No Phoenix device-level validation recorded."
+    },
+    "wifi": {
+      "status": "not_assessed",
+      "evidence_level": "none",
+      "evidence": [],
+      "notes": "No Phoenix device-level validation recorded."
+    },
+    "bluetooth": {
+      "status": "not_assessed",
+      "evidence_level": "none",
+      "evidence": [],
+      "notes": "No Phoenix device-level validation recorded."
+    },
+    "cellular_baseband": {
+      "status": "not_assessed",
+      "evidence_level": "none",
+      "evidence": [],
+      "notes": "No Phoenix device-level validation recorded."
+    },
+    "sep_touch_id": {
+      "status": "not_assessed",
+      "evidence_level": "none",
+      "evidence": [],
+      "notes": "No Phoenix device-level validation recorded."
+    },
+    "power_thermal": {
+      "status": "not_assessed",
+      "evidence_level": "none",
+      "evidence": [],
+      "notes": "No Phoenix device-level validation recorded."
+    },
+    "sensors": {
+      "status": "not_assessed",
+      "evidence_level": "none",
+      "evidence": [],
+      "notes": "No Phoenix device-level validation recorded."
+    },
+    "nfc_secure_element": {
+      "status": "not_assessed",
+      "evidence_level": "none",
+      "evidence": [],
+      "notes": "No Phoenix device-level validation recorded."
+    },
+    "storage_apfs": {
+      "status": "not_assessed",
+      "evidence_level": "none",
+      "evidence": [],
+      "notes": "No Phoenix device-level validation recorded."
+    },
+    "memory_pressure": {
+      "status": "not_assessed",
+      "evidence_level": "none",
+      "evidence": [],
+      "notes": "No Phoenix device-level validation recorded."
+    },
+    "core_services": {
+      "status": "not_assessed",
+      "evidence_level": "none",
+      "evidence": [],
+      "notes": "No Phoenix device-level validation recorded."
+    },
+    "springboard": {
+      "status": "not_assessed",
+      "evidence_level": "none",
+      "evidence": [],
+      "notes": "No Phoenix device-level validation recorded."
+    }
+  }
+}
