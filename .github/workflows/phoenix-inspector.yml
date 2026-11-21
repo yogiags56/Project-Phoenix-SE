@@ -10,12 +10,10 @@ on:
       - "tools/phoenix-kc/**"
       - "tools/phoenix-kext/**"
       - "tools/phoenix-compat/**"
+      - "tools/phoenix-a9-profile/**"
       - ".github/workflows/phoenix-inspector.yml"
   pull_request:
     paths:
-      - "tools/phoenix-inspector/**"
-      - "tools/phoenix-img4/**"
-      - ".github/workflows/phoenix-inspector.yml"
       - "tools/phoenix-inspector/**"
       - "tools/phoenix-img4/**"
       - "tools/phoenix-fdt/**"
@@ -23,6 +21,7 @@ on:
       - "tools/phoenix-kc/**"
       - "tools/phoenix-kext/**"
       - "tools/phoenix-compat/**"
+      - "tools/phoenix-a9-profile/**"
       - ".github/workflows/phoenix-inspector.yml"
 
 jobs:
@@ -54,6 +53,9 @@ jobs:
       - name: Test Phoenix Firmware Compatibility Mapper
         working-directory: tools/phoenix-compat
         run: python -m unittest discover -s tests -v
+      - name: Test Phoenix A9 Platform Profiler
+        working-directory: tools/phoenix-a9-profile
+        run: python -m unittest discover -s tests -v
       - name: Check tool help
         run: |
           python tools/phoenix-inspector/phoenix_inspector.py --help
@@ -63,3 +65,5 @@ jobs:
           python tools/phoenix-kc/phoenix_kc.py --help
           python tools/phoenix-kext/phoenix_kext.py --help
           python tools/phoenix-compat/phoenix_compat.py --help
+          python tools/phoenix-a9-profile/phoenix_a9_profile.py --help
+          python -m json.tool profiles/iphone-se-1st-gen.template.json > /dev/null
