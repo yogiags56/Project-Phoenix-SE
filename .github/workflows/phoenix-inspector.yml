@@ -12,6 +12,7 @@ on:
       - "tools/phoenix-compat/**"
       - "tools/phoenix-a9-profile/**"
       - "tools/phoenix-dt-diff/**"
+      - "tools/phoenix-kernel-compat/**"
       - ".github/workflows/phoenix-inspector.yml"
   pull_request:
     paths:
@@ -60,6 +61,9 @@ jobs:
       - name: Test Phoenix Device Tree Comparator
         working-directory: tools/phoenix-dt-diff
         run: python -m unittest discover -s tests -v
+      - name: Test Phoenix Kernel Compatibility Analyzer
+        working-directory: tools/phoenix-kernel-compat
+        run: python -m unittest discover -s tests -v
       - name: Check tool help
         run: |
           python tools/phoenix-inspector/phoenix_inspector.py --help
@@ -71,4 +75,5 @@ jobs:
           python tools/phoenix-compat/phoenix_compat.py --help
           python tools/phoenix-a9-profile/phoenix_a9_profile.py --help
           python tools/phoenix-dt-diff/phoenix_dt_diff.py --help
+          python tools/phoenix-kernel-compat/phoenix_kernel_compat.py --help
           python -m json.tool profiles/iphone-se-1st-gen.template.json > /dev/null
