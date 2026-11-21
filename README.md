@@ -64,7 +64,9 @@ That work is a reference for understanding firmware composition and compatibilit
 - [x] Add a read-only symbol-table comparison tool for matching Mach-O architectures.
 - [x] Add an evidence-labelled kernel dependency graph with optional Kernel Collection correlation and explicit symbol-provider mappings.
 - [x] Add a read-only HTML/JSON evidence dashboard for aggregating analyzer reports.
+- [x] Add a lexical patch-pattern inventory for C patcher sources, with source hashes and mutation-site references.
 - [ ] Investigate A9 kernel support and required low-level interfaces.
+- [x] Add a static inventory tool for patcher signature arrays and mutation call sites.
 - [ ] Investigate graphics, display, touch, audio, camera, and wireless drivers.
 - [ ] Investigate SEP, baseband, boot chain, and restore compatibility.
 - [ ] Assess userspace requirements, including frameworks, launch services, and system services.
