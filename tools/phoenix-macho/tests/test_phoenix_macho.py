@@ -4,7 +4,7 @@ from phoenix_macho import MachOError, parse_binary
 
 def thin_macho():
     endian="<"
-    header=struct.pack(endian+"8I",0xFEEDFACF,0x0100000C,0,2,2,32,0,0)
+    header=struct.pack(endian+"8I",0xFEEDFACF,0x0100000C,0,2,2,48,0,0)
     uuid=bytes(range(16))
     cmd1=struct.pack(endian+"2I",0x1B,24)+uuid
     cmd2=struct.pack(endian+"6I",0x2,24,56,0,56,0)
