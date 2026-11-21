@@ -44,6 +44,7 @@ That work is a reference for understanding firmware composition and compatibilit
 - [PMU signature catalog](research/PMU-SIGNATURE-CATALOG.json) — source-derived signature and mutation metadata.
 - [PMU ARM64 semantic decode report](research/PMU-ARM64-SEMANTIC-DECODE.json) — decoded instruction subset, replacement words, and explicit unknown/masked-template markers.
 - [PMU patch instruction delta](research/PMU-PATCH-INSTRUCTION-DELTA.md) — original/replacement instruction-class comparison for all 66 mutating rules and limits of the current decoder.
+- [PMU LDO control-flow reconstruction](research/PMU-LDO-CONTROL-FLOW.md) — runtime branch redirects, target anchors, rule 60 LSRV, and remaining CFG limitations.
 - [PMU semantic decoder](tools/phoenix-pmu-semantic/) — reproducible decoder and unit tests.
 
 ## Research objectives
