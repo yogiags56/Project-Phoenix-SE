@@ -26,7 +26,7 @@ def close_brace(s,o):
             if not d:return i
     raise AuditError("unterminated array initializer")
 def comment_before(s,o):
-    m=re.search(r"/\*([\s\S]*?)\*/\s*$",s[:o])
+    m=re.search(r"/\*([\s\S]*?)\*/\s*(?:(?:static|const)\s+)*$",s[:o])
     return re.sub(r"^\s*\* ?","",m.group(1),flags=re.M).strip() if m else ""
 def analyze(label,path):
     raw=path.read_bytes(); src=raw.decode("utf-8"); code=clean_comments(src); arrays=[]
