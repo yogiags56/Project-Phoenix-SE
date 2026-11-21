@@ -63,6 +63,7 @@ That work is a reference for understanding firmware composition and compatibilit
 - [x] Add a kernel evidence correlator for Mach-O architecture, Kernel Collection architecture and kext inventory reports.
 - [x] Add a read-only symbol-table comparison tool for matching Mach-O architectures.
 - [x] Add an evidence-labelled kernel dependency graph with optional Kernel Collection correlation and explicit symbol-provider mappings.
+- [x] Add a read-only HTML/JSON evidence dashboard for aggregating analyzer reports.
 - [ ] Investigate A9 kernel support and required low-level interfaces.
 - [ ] Investigate graphics, display, touch, audio, camera, and wireless drivers.
 - [ ] Investigate SEP, baseband, boot chain, and restore compatibility.
@@ -140,7 +141,8 @@ The repository will grow as the research becomes reproducible:
     │   ├── phoenix-dt-diff/
     │   ├── phoenix-kernel-compat/
     │   ├── phoenix-symbol-diff/
-    │   └── phoenix-kernel-graph/
+    │   ├── phoenix-kernel-graph/
+    │   └── phoenix-dashboard/
     └── logs/
 
 Only add scripts and binaries when their purpose, provenance, and usage can be documented.
