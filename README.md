@@ -41,6 +41,8 @@ That work is a reference for understanding firmware composition and compatibilit
 
 ## Latest PMU analysis artifacts
 
+- **Decoder correctness update:** fixed AArch64 unsigned-immediate load/store width decoding (LDRB/LDRH/LDR W/LDR X and STRB/STRH/STR W/STR X). Added width and scaled-offset regression tests. This corrects earlier semantic report entries that labelled some 64-bit LDR encodings as LDRB; regenerate the checked-in JSON report with the updated decoder before relying on its aggregate counts.
+
 - [PMU signature catalog](research/PMU-SIGNATURE-CATALOG.json) — source-derived signature and mutation metadata.
 - [PMU ARM64 semantic decode report](research/PMU-ARM64-SEMANTIC-DECODE.json) — decoded instruction subset, replacement words, and explicit unknown/masked-template markers.
 - [PMU patch instruction delta](research/PMU-PATCH-INSTRUCTION-DELTA.md) — original/replacement instruction-class comparison for all 66 mutating rules and limits of the current decoder.
