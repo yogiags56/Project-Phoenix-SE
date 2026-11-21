@@ -1,13 +1,15 @@
-name: Phoenix Inspector CI
+name: Phoenix Firmware Tools CI
 
 on:
   push:
     paths:
       - "tools/phoenix-inspector/**"
+      - "tools/phoenix-img4/**"
       - ".github/workflows/phoenix-inspector.yml"
   pull_request:
     paths:
       - "tools/phoenix-inspector/**"
+      - "tools/phoenix-img4/**"
       - ".github/workflows/phoenix-inspector.yml"
 
 jobs:
@@ -18,8 +20,12 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - name: Run unit tests
+      - name: Test Phoenix Inspector
         working-directory: tools/phoenix-inspector
         run: python -m unittest discover -s tests -v
-      - name: Check CLI help
-        run: python tools/phoenix-inspector/phoenix_inspector.py --help
+      - name: Test Phoenix IMG4 Parser
+        run: python -m unittest discover -s tools/phoenix-img4/tests -v
+      - name: Check tool help
+        run: |
+          python tools/phoenix-inspector/phoenix_inspector.py --help
+          python tools/phoenix-img4/phoenix_img4.py --help
