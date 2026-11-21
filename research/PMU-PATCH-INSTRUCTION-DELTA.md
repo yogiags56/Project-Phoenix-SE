@@ -25,7 +25,7 @@ The 66 mutating rules change one selected 32-bit word at the rule's `patch_word_
 
 The decoder reports five replacements as NOPs (AArch64 `0xd503201f`): rule indices 57, 59, 61, 62, and 65. Two of these replace branch-class instructions (59 and 65), two replace logical-register instructions (61 and 62), and one replaces a move-wide instruction (57).
 
-This observation is important but does **not** establish the complete behavior of the LDO routine. The patcher also installs four dynamic branch redirects. The actual branch destinations are computed from matched addresses at patch time; the static replacement words alone do not reveal the final control-flow graph.
+This observation is important but does **not** establish the complete behavior of the LDO routine. The patcher overwrites the static placeholders for rules 59, 61, 62, and 65 with four dynamic branch instructions in `prepare_jumps()`. Rule 57 remains a NOP. The branch kinds and target rule anchors are now documented in [PMU LDO Control-Flow Reconstruction](PMU-LDO-CONTROL-FLOW.md); exact byte displacements still depend on the matched kernel offsets.
 
 ## High-confidence decoded examples
 
@@ -33,9 +33,9 @@ This observation is important but does **not** establish the complete behavior o
 - Rule 4: `cmp x8, #0x18` becomes `cmp x8, #0x15` (register/width interpretation follows the decoded word).
 - Rule 1: `movz w1, #0x12c` becomes `movz w1, #0x126`.
 - Rule 54: `cmp w21, #0x20` becomes `cmp w21, #0x1c`.
-- Rule 57: a `movk` instruction is replaced by `nop`.
-- Rule 59: a masked `cbz` template is replaced by `nop`; wildcard bits mean the precise original branch register/offset are not established by this signature word.
-- Rule 65: a masked `b.ne` template is replaced by `nop`; its branch displacement is not concrete in the masked signature.
+- Rule 57: a `movk` instruction is replaced by `nop` and remains a NOP after dynamic jump preparation.
+- Rule 59: a masked `cbz` template is replaced at runtime by an unconditional `B` to rule 66.
+- Rule 65: a masked `b.ne` template is replaced at runtime by an unconditional `B` to rule 60.
 
 The examples are decoded from the 32-bit words stored in the catalog. Register names and immediate values should be checked against the exact instruction word and the source rule context before drawing a higher-level conclusion.
 
@@ -43,7 +43,7 @@ The examples are decoded from the 32-bit words stored in the catalog. Register n
 
 The current Phoenix decoder supports a selected subset: B/BL, B.cond, CBZ/CBNZ, TBZ/TBNZ, ADR/ADRP, ADD/SUB immediate and CMP/CMN aliases, MOVN/MOVZ/MOVK, selected logical shifted-register operations, integer unsigned-immediate loads/stores, BR/BLR/RET, and NOP.
 
-It is not a complete AArch64 decoder. The report contains 103 words classified as unknown across the 630 signature words. Five of the 66 replacement words are also currently unknown under the limited decoder. One noteworthy replacement is `0x9ada2508` (rule 60); it must remain unresolved until decoded by a full disassembler and checked in surrounding instruction context.
+It is not a complete AArch64 decoder. The report contains 103 words classified as unknown across the 630 signature words. Five of the 66 replacement words are also currently unknown under the limited decoder. Rule 60's replacement `0x9ada2508` is `LSRV X8, X8, X26`; its higher-level purpose still needs surrounding data-flow context.
 
 Two mutating signature words have non-full masks. Their variable fields are templates, not exact original instruction operands. This particularly matters for branch encodings, where displacement bits are deliberately masked.
 
@@ -53,7 +53,7 @@ Two mutating signature words have non-full masks. Their variable fields are temp
 
 1. The PMU patcher changes immediate arithmetic and move-wide constants across GPIO, PMU event/mask, and LDO rule groups.
 2. Five replacement words are NOP encodings.
-3. The LDO group includes instruction replacements as well as four separately calculated branch redirects.
+3. The LDO group includes instruction replacements and four separately calculated branch redirects (59→66, 61→67 via TBZ, 62→68, and 65→60).
 4. Signature masks and patch-word indices are explicit in the source and preserved in the catalog.
 
 ### Not established
