@@ -9,11 +9,20 @@ on:
       - "tools/phoenix-macho/**"
       - "tools/phoenix-kc/**"
       - "tools/phoenix-kext/**"
+      - "tools/phoenix-compat/**"
       - ".github/workflows/phoenix-inspector.yml"
   pull_request:
     paths:
       - "tools/phoenix-inspector/**"
       - "tools/phoenix-img4/**"
+      - ".github/workflows/phoenix-inspector.yml"
+      - "tools/phoenix-inspector/**"
+      - "tools/phoenix-img4/**"
+      - "tools/phoenix-fdt/**"
+      - "tools/phoenix-macho/**"
+      - "tools/phoenix-kc/**"
+      - "tools/phoenix-kext/**"
+      - "tools/phoenix-compat/**"
       - ".github/workflows/phoenix-inspector.yml"
 
 jobs:
@@ -42,6 +51,9 @@ jobs:
       - name: Test Phoenix Kext Dependency Analyzer
         working-directory: tools/phoenix-kext
         run: python -m unittest discover -s tests -v
+      - name: Test Phoenix Firmware Compatibility Mapper
+        working-directory: tools/phoenix-compat
+        run: python -m unittest discover -s tests -v
       - name: Check tool help
         run: |
           python tools/phoenix-inspector/phoenix_inspector.py --help
@@ -50,3 +62,4 @@ jobs:
           python tools/phoenix-macho/phoenix_macho.py --help
           python tools/phoenix-kc/phoenix_kc.py --help
           python tools/phoenix-kext/phoenix_kext.py --help
+          python tools/phoenix-compat/phoenix_compat.py --help
