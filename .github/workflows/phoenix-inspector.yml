@@ -21,6 +21,7 @@ on:
       - "tools/phoenix-pmu-catalog/**"
       - "tools/phoenix-pmu-semantic/**"
       - "tools/phoenix-pmu-discovery/**"
+      - "tools/phoenix-pmu-vmmap/**"
       - "tools/phoenix-register-flow/**"
       - "tools/phoenix-patch-patterns/**"
       - "tools/phoenix-arm64-disasm/**"
@@ -42,6 +43,7 @@ on:
       - "tools/phoenix-kernel-compat/**"
       - "tools/phoenix-symbol-diff/**"
       - "tools/phoenix-kernel-graph/**"
+      - "tools/phoenix-pmu-vmmap/**"
       - "tools/phoenix-dashboard/**"
       - "docs/research/**"
       - "research/**"
@@ -110,6 +112,9 @@ jobs:
       - name: Test Phoenix PMU Signature Catalog
         working-directory: tools/phoenix-pmu-catalog
         run: python -m unittest discover -s tests -v
+      - name: Test Phoenix PMU Virtual Address Mapper
+        working-directory: tools/phoenix-pmu-vmmap
+        run: python -m unittest discover -s tests -v
       - name: Test Phoenix PMU Signature Discovery
         working-directory: tools/phoenix-pmu-discovery
         run: python -m unittest discover -s tests -v
@@ -143,4 +148,5 @@ jobs:
           python tools/phoenix-pmu-catalog/phoenix_pmu_catalog.py --help
           python tools/phoenix-pmu-semantic/phoenix_pmu_semantic.py --help
           python tools/phoenix-pmu-discovery/phoenix_pmu_discovery.py --help
+          python tools/phoenix-pmu-vmmap/phoenix_pmu_vmmap.py --help
           python -m json.tool profiles/iphone-se-1st-gen.template.json > /dev/null
