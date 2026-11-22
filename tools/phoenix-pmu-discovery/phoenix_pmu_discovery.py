@@ -121,7 +121,7 @@ def main(argv=None):
         report=discover(binary,rules,str(a.kernel_collection))
         a.out.parent.mkdir(parents=True,exist_ok=True)
         if a.out.exists(): raise DiscoveryError("refusing to overwrite existing report")
-        a.out.write_text(json.dumps(report,indent=2)+"\\n",encoding="utf-8")
+        a.out.write_text(json.dumps(report,indent=2)+"\n",encoding="utf-8")
         print("fileset entries:",report["kernel_collection"]["entry_count"])
         print("entries with signature hits:",sum(bool(e["matches"]) for e in report["entries"]))
         print("report:",a.out)
