@@ -41,6 +41,8 @@ That work is a reference for understanding firmware composition and compatibilit
 
 ## Latest PMU analysis artifacts
 
+- [Phoenix ARM64 register def-use analyzer](tools/phoenix-register-flow/) — conservative sequential read/write tracking, Wn/Xn alias normalization, NZCV access markers, memory base-register reads, and unknown-instruction barriers. It is not yet CFG-aware and must be fed actual disassembly text.
+
 - **Decoder correctness update:** fixed AArch64 unsigned-immediate load/store width decoding (LDRB/LDRH/LDR W/LDR X and STRB/STRH/STR W/STR X). Added width and scaled-offset regression tests. This corrects earlier semantic report entries that labelled some 64-bit LDR encodings as LDRB; regenerate the checked-in JSON report with the updated decoder before relying on its aggregate counts.
 
 - [PMU signature catalog](research/PMU-SIGNATURE-CATALOG.json) — source-derived signature and mutation metadata.
