@@ -5,7 +5,7 @@ def macho_fileset(entry_blob):
  entry_offset=80
  command=bytearray(40)
  struct.pack_into("<IIQQII",command,0,0x80000035,40,0xFFFFFFF007004000,entry_offset,32,0)
- command[32:36]=b"pmu\x00
+ command[32:36]=bytes([112,109,117,0])
  header=struct.pack("<8I",0xFEEDFACF,0x0100000C,0,0xC,1,len(command),0,0)
  return header+bytes(command)+bytes(entry_offset-(32+len(command)))+entry_blob
 
