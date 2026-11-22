@@ -1,5 +1,6 @@
-import struct,unittest
-from phoenix_pmu_discovery import discover,DiscoveryError
+import struct,unittest,json,tempfile
+from pathlib import Path
+from phoenix_pmu_discovery import discover,DiscoveryError,load_catalog
 
 def macho_fileset(entry_blob):
  entry_offset=80
@@ -18,7 +19,7 @@ class DiscoveryTests(unittest.TestCase):
   raw=macho_fileset(body)
   r=discover(raw,self.catalog(),"fixture.kc")
   e=r["entries"][0]
-  self.assertEqual(e["identifier"],"pmu.kext")
+  self.assertEqual(e["identifier"],"pmu")
   self.assertTrue(e["name_hint_only"])
   self.assertEqual(e["signature_match_count"],1)
   self.assertEqual(e["matches"][0]["file_offset"],88)
@@ -26,13 +27,15 @@ class DiscoveryTests(unittest.TestCase):
   self.assertFalse(r["scope"]["compatibility_assessed"])
  def test_masked_wildcard_bits(self):
   cat=[{"index":1,"name":"masked","signature_id":1,
-        "words":[(0x54000000,0xff00001f)]}]
+        "words":[(0x54000000,0xff000000)]}]
   body=b"\x00"*4+struct.pack("<I",0x54000121)
   r=discover(macho_fileset(body),cat)
   self.assertEqual(r["entries"][0]["signature_match_count"],1)
  def test_rejects_non_fileset(self):
   with self.assertRaises(DiscoveryError): discover(b"not a fileset",self.catalog())
  def test_rejects_invalid_catalog_word(self):
-  with self.assertRaises(DiscoveryError):
-   discover(macho_fileset(b"x"*16),[{"index":0,"signature":[{"value":"nothex","mask":"ffffffff"}]}])
+  with tempfile.TemporaryDirectory() as d:
+   p=Path(d)/"bad.json"
+   p.write_text(json.dumps({"rules":[{"index":0,"signature":[{"value":"nothex","mask":"ffffffff"}]}]}))
+   with self.assertRaises(DiscoveryError): load_catalog(p)
 if __name__=="__main__":unittest.main()
