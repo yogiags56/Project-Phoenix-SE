@@ -124,10 +124,14 @@ def inspect(path: Path, extract: Path|None=None):
       "interpretation":["Magic-byte matches are triage hints, not proof that the complete file is valid.",
         "An IM4P OCTET STRING extraction is a byte-for-byte container extraction only; it does not decrypt or decompress the payload.",
         "A payload may remain encrypted, compressed, or wrapped after extraction."]}
+    direct_binary=analyze_binary(data,str(path))
+    if direct_binary: report["binary_analysis"]=direct_binary
     im4p=find_im4p(data)
     if im4p:
         raw=im4p.pop("_payload")
         report["im4p"]=im4p
+        nested_binary=analyze_binary(raw,str(path)+"#IM4P-payload")
+        if nested_binary: report["im4p"]["binary_analysis"]=nested_binary
         if extract is not None:
             extract.parent.mkdir(parents=True,exist_ok=True)
             if extract.exists(): raise ValueError(f"refusing to overwrite existing output: {extract}")
