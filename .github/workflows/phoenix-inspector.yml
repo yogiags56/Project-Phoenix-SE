@@ -18,6 +18,7 @@ on:
       - "tools/phoenix-dashboard/**"
       - "tools/phoenix-pmu-catalog/**"
       - "tools/phoenix-pmu-semantic/**"
+      - "tools/phoenix-register-flow/**"
       - "tools/phoenix-patch-patterns/**"
       - "tools/phoenix-arm64-disasm/**"
       - "docs/research/**"
@@ -102,6 +103,9 @@ jobs:
         run: python -m unittest discover -s tests -v
       - name: Test Phoenix PMU ARM64 Semantic Decoder
         working-directory: tools/phoenix-pmu-semantic
+        run: python -m unittest discover -s tests -v
+      - name: Test Phoenix Register Def-Use Analyzer
+        working-directory: tools/phoenix-register-flow
         run: python -m unittest discover -s tests -v
       - name: Regenerate Phoenix PMU semantic report
         run: python tools/phoenix-pmu-semantic/phoenix_pmu_semantic.py research/PMU-SIGNATURE-CATALOG.json --output /tmp/phoenix-pmu-semantic-report.json
