@@ -41,6 +41,8 @@ That work is a reference for understanding firmware composition and compatibilit
 
 ## Latest PMU analysis artifacts
 
+- [Phoenix IPSW Evidence Inspector](tools/phoenix-evidence/) — local, read-only BuildManifest identity and kernelcache ZIP-member hashing/extraction. It does not decrypt or decompress kernelcache payloads.
+
 - [PMU donor extraction checklist](research/PMU-DONOR-EXTRACTION-CHECKLIST.md) — exact iPad 5 iOS 16.1 donor artifact chain, local-only evidence handling, kernelcache identification, and acceptance criteria for a real PMU disassembly.
 
 - [PMU LDO register trace](research/PMU-LDO-REGISTER-TRACE.md) — source-derived analysis of the index boundary, X8 mask construction, LSRV/TBZ path, W21/W26 relationship, and evidence gaps before claiming a full runtime def-use graph.
