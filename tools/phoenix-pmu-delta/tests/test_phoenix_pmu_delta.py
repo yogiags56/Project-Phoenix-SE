@@ -21,7 +21,8 @@ class DeltaAuditTests(unittest.TestCase):
   row=audit(cat)["rules"][0]
   self.assertEqual(row["effective_replacement"]["mnemonic"],"tbz")
   self.assertEqual(row["dynamic_redirect"]["target_rule"],1)
-  self.assertTrue(row["instruction_class_changed"])
+  self.assertFalse(row["instruction_class_changed"])
+  self.assertTrue(row["mnemonic_changed"])
  def test_masked_original_is_not_concrete(self):
   cat={"rules":[{"index":0,"name":"masked","change":True,"patch_word_index":0,"replacement_word":"0xd503201f","signature":[{"value":"0x54000001","mask":"0xff00001f"}]}]}
   row=audit(cat)["rules"][0]
