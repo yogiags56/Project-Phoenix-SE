@@ -13,11 +13,17 @@ from typing import Any
 HERE=Path(__file__).resolve().parent
 ROOT=HERE.parents[1]
 sys.path.insert(0,str(ROOT/"tools"/"phoenix-img4"))
+sys.path.insert(0,str(ROOT/"tools"/"phoenix-macho"))
+sys.path.insert(0,str(ROOT/"tools"/"phoenix-kc"))
 try:
     from phoenix_img4 import read_tlv, children, ia5, DERError
+    from phoenix_macho import parse_binary, MachOError
+    from phoenix_kc import inspect_fileset, FilesetError
 except ImportError:  # pragma: no cover
     read_tlv=children=ia5=None
     DERError=ValueError
+    parse_binary=inspect_fileset=None
+    MachOError=FilesetError=ValueError
 
 def sha256(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
@@ -79,6 +85,30 @@ def find_im4p(data: bytes) -> dict[str,Any] | None:
                 "payload_magic":classify(raw[:64]),"_payload":raw}
     except (DERError,ValueError,IndexError,KeyError):
         return None
+
+def analyze_binary(data: bytes, source: str):
+    """Structurally inspect recognized Mach-O payloads; never infer compatibility."""
+    if parse_binary is None or len(data)<4:
+        return None
+    magic=data[:4]
+    macho_magics={bytes.fromhex(x) for x in ("cffaedfe","feedfacf","cafebabe","bebafeca","cafebabf","bfbafeca")}
+    if magic not in macho_magics:
+        return None
+    report={"format":"Mach-O candidate","source":source}
+    try:
+        parsed=parse_binary(data,source)
+        report["macho"]=parsed
+        # MH_FILESET is Mach-O filetype 0xC. Inspect entries only for a thin
+        # fileset image; universal slices require selecting a slice explicitly.
+        if parsed["binary_type"]=="thin" and parsed["slices"][0]["macho"]["file_type"]==0xC:
+            if inspect_fileset is not None:
+                report["kernel_collection"]=inspect_fileset(data,source)
+        report["validation"]="structural parser accepted input"
+    except (MachOError,FilesetError,ValueError,struct.error) as exc:
+        report["validation"]="recognized magic, structural parse failed"
+        report["error"]=str(exc)
+    report["compatibility_conclusion"]="not assessed"
+    return report
 
 def inspect(path: Path, extract: Path|None=None):
     if not path.is_file(): raise ValueError(f"input not found: {path}")
