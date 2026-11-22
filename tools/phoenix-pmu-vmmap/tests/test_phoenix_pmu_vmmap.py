@@ -29,7 +29,7 @@ class VMMapTests(unittest.TestCase):
         m=r["entries"][0]["matches"][0]
         self.assertEqual(m["file_offset"],184)
         self.assertEqual(m["mapping"]["mapping_status"],"mapped_executable")
-        self.assertEqual(m["mapping"]["virtual_address"],"0xffffff f007004098".replace(" ",""))
+        self.assertEqual(m["mapping"]["virtual_address"],"0xfffffff007004068")
     def test_non_executable_segment_has_no_vm_address(self):
         r=analyze(fileset_with_image(executable=False),self.rules())
         m=r["entries"][0]["matches"][0]["mapping"]
