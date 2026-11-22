@@ -41,6 +41,8 @@ That work is a reference for understanding firmware composition and compatibilit
 
 ## Latest PMU analysis artifacts
 
+- [Phoenix Payload Inspector](tools/phoenix-payload/) — signature-based format triage and bounded, byte-exact IM4P payload extraction; explicitly does not decrypt or decompress firmware.
+
 - [Phoenix IPSW Evidence Inspector](tools/phoenix-evidence/) — local, read-only BuildManifest identity and kernelcache ZIP-member hashing/extraction. It does not decrypt or decompress kernelcache payloads.
 
 - [PMU donor extraction checklist](research/PMU-DONOR-EXTRACTION-CHECKLIST.md) — exact iPad 5 iOS 16.1 donor artifact chain, local-only evidence handling, kernelcache identification, and acceptance criteria for a real PMU disassembly.
