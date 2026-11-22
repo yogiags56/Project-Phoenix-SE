@@ -4,7 +4,7 @@
 No decryption, decompression, signature verification, patching, or device access.
 """
 from __future__ import annotations
-import argparse, hashlib, json, sys
+import argparse, hashlib, json, sys, struct
 from pathlib import Path
 from typing import Any
 
