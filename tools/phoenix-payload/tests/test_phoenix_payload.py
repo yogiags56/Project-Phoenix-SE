@@ -1,4 +1,4 @@
-import tempfile,unittest
+import tempfile,unittest,struct
 from pathlib import Path
 from phoenix_payload import classify,inspect
 
@@ -27,6 +27,23 @@ class TestPayloadInspector(unittest.TestCase):
    self.assertEqual(r["im4p"]["payload_size"],len(payload))
    self.assertEqual(r["im4p"]["payload_sha256"],r["source"]["sha256"] if False else __import__("hashlib").sha256(payload).hexdigest())
    self.assertIn("Mach-O 64-bit",r["im4p"]["payload_magic"])
+
+ def test_direct_macho_structural_analysis(self):
+  macho=struct.pack("<8I",0xFEEDFACF,0x0100000C,0,2,0,0,0,0)
+  with tempfile.TemporaryDirectory() as d:
+   src=Path(d)/"kernel";src.write_bytes(macho)
+   r=inspect(src)
+   self.assertEqual(r["binary_analysis"]["validation"],"structural parser accepted input")
+   self.assertEqual(r["binary_analysis"]["macho"]["slices"][0]["architecture"]["name"],"ARM64")
+   self.assertEqual(r["binary_analysis"]["compatibility_conclusion"],"not assessed")
+ def test_im4p_embedded_macho_analysis(self):
+  macho=struct.pack("<8I",0xFEEDFACF,0x0100000C,0,2,0,0,0,0)
+  im4p=seq(ia5("IM4P"),ia5("krnl"),ia5("test-kernel"),tlv(0x04,macho))
+  with tempfile.TemporaryDirectory() as d:
+   src=Path(d)/"kernel.im4p";src.write_bytes(im4p)
+   r=inspect(src)
+   self.assertEqual(r["im4p"]["binary_analysis"]["validation"],"structural parser accepted input")
+   self.assertEqual(r["im4p"]["binary_analysis"]["macho"]["slices"][0]["architecture"]["name"],"ARM64")
  def test_refuse_overwrite(self):
   payload=b"raw"
   im4p=seq(ia5("IM4P"),ia5("krnl"),ia5("kernel"),tlv(0x04,payload))
