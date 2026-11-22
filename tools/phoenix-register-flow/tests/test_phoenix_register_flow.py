@@ -17,7 +17,7 @@ class TestRegisterFlow(unittest.TestCase):
   r=self.run_listing("1000: add x8, x22, #0x20\n1004: ldr x9, [x8, #0x10]\n1008: str x9, [x22]\n")
   self.assertEqual(r["instructions"][1]["reads"],["r8"])
   self.assertEqual(r["instructions"][1]["writes"],["r9"])
-  self.assertEqual(r["instructions"][2]["reads"],["r9","r22"])
+  self.assertEqual(r["instructions"][2]["reads"],["r22","r9"])
  def test_unknown_instruction_is_barrier(self):
   r=self.run_listing("1000: mov x8, #1\n1004: mystery x8, x9\n1008: add x10, x8, #1\n")
   self.assertEqual(len(r["unknown_effect_barriers"]),1)
