@@ -5,6 +5,7 @@ on:
     paths:
       - "tools/phoenix-inspector/**"
       - "tools/phoenix-img4/**"
+      - "tools/phoenix-evidence/**"
       - "tools/phoenix-fdt/**"
       - "tools/phoenix-macho/**"
       - "tools/phoenix-kc/**"
@@ -55,6 +56,9 @@ jobs:
           python-version: "3.11"
       - name: Test Phoenix Inspector
         working-directory: tools/phoenix-inspector
+        run: python -m unittest discover -s tests -v
+      - name: Test Phoenix IPSW Evidence Inspector
+        working-directory: tools/phoenix-evidence
         run: python -m unittest discover -s tests -v
       - name: Test Phoenix IMG4 Parser
         working-directory: tools/phoenix-img4
@@ -113,6 +117,7 @@ jobs:
         run: |
           python tools/phoenix-inspector/phoenix_inspector.py --help
           python tools/phoenix-img4/phoenix_img4.py --help
+          python tools/phoenix-evidence/phoenix_evidence.py --help
           python tools/phoenix-fdt/phoenix_fdt.py --help
           python tools/phoenix-macho/phoenix_macho.py --help
           python tools/phoenix-kc/phoenix_kc.py --help
