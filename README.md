@@ -41,6 +41,8 @@ That work is a reference for understanding firmware composition and compatibilit
 
 ## Latest PMU analysis artifacts
 
+- [Phoenix PMU Virtual Address Mapper](tools/phoenix-pmu-vmmap/) — maps signature file offsets through embedded Mach-O segment file ranges, reporting VM addresses only for unique executable-segment mappings.
+
 - [Phoenix PMU Signature Discovery](tools/phoenix-pmu-discovery/) — read-only masked signature search across Kernel Collection fileset entries, preserving file offsets and reporting heuristic identity hints separately.
 
 - [Phoenix Payload Inspector](tools/phoenix-payload/) — signature-based format triage, byte-exact IM4P payload extraction, and structural Mach-O/MH_FILESET inspection through the existing analyzers; explicitly does not decrypt, decompress, or establish compatibility.
