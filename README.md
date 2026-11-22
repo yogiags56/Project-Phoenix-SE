@@ -41,6 +41,8 @@ That work is a reference for understanding firmware composition and compatibilit
 
 ## Latest PMU analysis artifacts
 
+- [Phoenix PMU Patch Delta Auditor](tools/phoenix-pmu-delta/) — compares source-derived original instruction templates with declared replacements and dynamic branch redirects; does not require a donor binary.
+
 - [Phoenix PMU Virtual Address Mapper](tools/phoenix-pmu-vmmap/) — maps signature file offsets through embedded Mach-O segment file ranges, reporting VM addresses only for unique executable-segment mappings.
 
 - [Phoenix PMU Signature Discovery](tools/phoenix-pmu-discovery/) — read-only masked signature search across Kernel Collection fileset entries, preserving file offsets and reporting heuristic identity hints separately.
