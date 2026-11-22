@@ -6,6 +6,7 @@ on:
       - "tools/phoenix-inspector/**"
       - "tools/phoenix-img4/**"
       - "tools/phoenix-evidence/**"
+      - "tools/phoenix-payload/**"
       - "tools/phoenix-fdt/**"
       - "tools/phoenix-macho/**"
       - "tools/phoenix-kc/**"
@@ -59,6 +60,9 @@ jobs:
         run: python -m unittest discover -s tests -v
       - name: Test Phoenix IPSW Evidence Inspector
         working-directory: tools/phoenix-evidence
+        run: python -m unittest discover -s tests -v
+      - name: Test Phoenix Payload Inspector
+        working-directory: tools/phoenix-payload
         run: python -m unittest discover -s tests -v
       - name: Test Phoenix IMG4 Parser
         working-directory: tools/phoenix-img4
@@ -118,6 +122,7 @@ jobs:
           python tools/phoenix-inspector/phoenix_inspector.py --help
           python tools/phoenix-img4/phoenix_img4.py --help
           python tools/phoenix-evidence/phoenix_evidence.py --help
+          python tools/phoenix-payload/phoenix_payload.py --help
           python tools/phoenix-fdt/phoenix_fdt.py --help
           python tools/phoenix-macho/phoenix_macho.py --help
           python tools/phoenix-kc/phoenix_kc.py --help
