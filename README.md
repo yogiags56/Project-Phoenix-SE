@@ -41,7 +41,7 @@ That work is a reference for understanding firmware composition and compatibilit
 
 ## Latest PMU analysis artifacts
 
-- [Phoenix Payload Inspector](tools/phoenix-payload/) — signature-based format triage and bounded, byte-exact IM4P payload extraction; explicitly does not decrypt or decompress firmware.
+- [Phoenix Payload Inspector](tools/phoenix-payload/) — signature-based format triage, byte-exact IM4P payload extraction, and structural Mach-O/MH_FILESET inspection through the existing analyzers; explicitly does not decrypt, decompress, or establish compatibility.
 
 - [Phoenix IPSW Evidence Inspector](tools/phoenix-evidence/) — local, read-only BuildManifest identity and kernelcache ZIP-member hashing/extraction. It does not decrypt or decompress kernelcache payloads.
 
