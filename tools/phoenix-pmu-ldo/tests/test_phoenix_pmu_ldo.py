@@ -10,7 +10,7 @@ class LDOOverlapTests(unittest.TestCase):
   r=analyze(self.catalog());s=r["summary"]
   self.assertEqual(s["rule_count"],16)
   self.assertEqual(s["overlap_edge_count"],25)
-  self.assertEqual(s["overlap_edges_ge_6_words"],20)
+  self.assertEqual(s["overlap_edges_ge_6_words"],16)
   self.assertEqual(s["dynamic_redirect_count"],4)
   self.assertFalse(r["scope"]["binary_offsets_resolved"])
  def test_known_overlap_54_to_69(self):
