@@ -88,7 +88,7 @@ def canonical(reg):
 
 def regs_in(op):
     out=[]
-    for token in re.findall(r"(?<![A-Za-z0-9_])[xw](?:[0-9]|[12][0-9]|30)|(?<![A-Za-z0-9_])(?:sp|wsp)(?![A-Za-z0-9_])",op):
+    for token in re.findall(r"(?<![A-Za-z0-9_])[xw](?:30|[12][0-9]|[0-9])|(?<![A-Za-z0-9_])(?:sp|wsp)(?![A-Za-z0-9_])",op):
         c=canonical(token)
         if c and c not in out:out.append(c)
     return out
