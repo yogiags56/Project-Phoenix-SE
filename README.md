@@ -41,6 +41,8 @@ That work is a reference for understanding firmware composition and compatibilit
 
 ## Latest PMU analysis artifacts
 
+- [Phoenix PMU LDO Symbolic Path Model](tools/phoenix-pmu-paths/) — models the four source-declared dynamic redirects and the documented TBZ fall-through without claiming a complete CFG.
+
 - [Phoenix PMU LDO Register Data-Flow Analyzer](tools/phoenix-pmu-dataflow/) — performs conservative, donorless register def-use and instruction-semantic analysis across LDO signature windows 54–69.
 
 - [Phoenix PMU LDO Overlap Reconstruction](tools/phoenix-pmu-ldo/) — reconstructs exact suffix/prefix overlaps among LDO signature windows (rules 54–69) without a donor binary.
