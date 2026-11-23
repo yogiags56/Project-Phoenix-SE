@@ -21,6 +21,7 @@ on:
       - "tools/phoenix-pmu-catalog/**"
       - "tools/phoenix-pmu-semantic/**"
       - "tools/phoenix-pmu-delta/**"
+      - "tools/phoenix-pmu-ldo/**"
       - "tools/phoenix-pmu-discovery/**"
       - "tools/phoenix-pmu-vmmap/**"
       - "tools/phoenix-register-flow/**"
@@ -45,6 +46,7 @@ on:
       - "tools/phoenix-symbol-diff/**"
       - "tools/phoenix-kernel-graph/**"
       - "tools/phoenix-pmu-delta/**"
+      - "tools/phoenix-pmu-ldo/**"
       - "tools/phoenix-pmu-vmmap/**"
       - "tools/phoenix-dashboard/**"
       - "docs/research/**"
@@ -120,6 +122,9 @@ jobs:
       - name: Test Phoenix PMU Signature Discovery
         working-directory: tools/phoenix-pmu-discovery
         run: python -m unittest discover -s tests -v
+      - name: Test Phoenix PMU LDO Overlap Reconstruction
+        working-directory: tools/phoenix-pmu-ldo
+        run: python -m unittest discover -s tests -v
       - name: Test Phoenix PMU Patch Delta Auditor
         working-directory: tools/phoenix-pmu-delta
         run: python -m unittest discover -s tests -v
@@ -129,6 +134,8 @@ jobs:
       - name: Test Phoenix Register Def-Use Analyzer
         working-directory: tools/phoenix-register-flow
         run: python -m unittest discover -s tests -v
+      - name: Generate donorless PMU LDO overlap report
+        run: python tools/phoenix-pmu-ldo/phoenix_pmu_ldo.py research/PMU-SIGNATURE-CATALOG.json --output /tmp/phoenix-pmu-ldo-overlap.json
       - name: Generate donorless PMU delta audit
         run: python tools/phoenix-pmu-delta/phoenix_pmu_delta.py research/PMU-SIGNATURE-CATALOG.json --output /tmp/phoenix-pmu-delta-audit.json
       - name: Regenerate Phoenix PMU semantic report
@@ -155,6 +162,7 @@ jobs:
           python tools/phoenix-pmu-catalog/phoenix_pmu_catalog.py --help
           python tools/phoenix-pmu-semantic/phoenix_pmu_semantic.py --help
           python tools/phoenix-pmu-delta/phoenix_pmu_delta.py --help
+          python tools/phoenix-pmu-ldo/phoenix_pmu_ldo.py --help
           python tools/phoenix-pmu-discovery/phoenix_pmu_discovery.py --help
           python tools/phoenix-pmu-vmmap/phoenix_pmu_vmmap.py --help
           python -m json.tool profiles/iphone-se-1st-gen.template.json > /dev/null
