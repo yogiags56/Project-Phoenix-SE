@@ -44,7 +44,7 @@ def decode_extended(w):
         if width is not None:
             scale=width//8;imm=sx((w>>15)&0x7f,7)*scale
             rt=w&31;rt2=(w>>10)&31;rn=(w>>5)&31
-            base=rname(rn)
+            base="sp" if rn==31 else rname(rn)
             if mode==1: mem=f"[{base}, #{imm}]!"
             elif mode==3: mem=f"[{base}], #{imm}"
             else: mem=f"[{base}, #{imm}]"
