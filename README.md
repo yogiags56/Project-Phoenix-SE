@@ -41,6 +41,8 @@ That work is a reference for understanding firmware composition and compatibilit
 
 ## Latest PMU analysis artifacts
 
+- [Phoenix PMU LDO Register Data-Flow Analyzer](tools/phoenix-pmu-dataflow/) — performs conservative, donorless register def-use and instruction-semantic analysis across LDO signature windows 54–69.
+
 - [Phoenix PMU LDO Overlap Reconstruction](tools/phoenix-pmu-ldo/) — reconstructs exact suffix/prefix overlaps among LDO signature windows (rules 54–69) without a donor binary.
 
 - [Phoenix PMU Patch Delta Auditor](tools/phoenix-pmu-delta/) — compares source-derived original instruction templates with declared replacements and dynamic branch redirects; does not require a donor binary.
