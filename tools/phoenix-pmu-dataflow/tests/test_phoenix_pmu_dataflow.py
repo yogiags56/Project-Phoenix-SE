@@ -30,7 +30,7 @@ class LDODataflowTests(unittest.TestCase):
   self.assertEqual(d["mnemonic"],"stp")
   reads,writes,*_=effects(d)
   self.assertIn("r9",reads);self.assertIn("r10",reads)
-  self.assertEqual(reads,["r9","r10","r1"])
+  self.assertEqual(reads,["r9","r10","sp"])
   self.assertEqual(writes,[])
  def test_masked_words_remain_marked(self):
   r=next(x for x in self.report["rules"] if x["rule_index"]==61)
