@@ -132,7 +132,7 @@ def main(argv=None):
         a.output.parent.mkdir(parents=True,exist_ok=True)
         if a.output.exists() and a.output.resolve()!=(ROOT/"research"/"PMU-LDO-OVERLAP-RECONSTRUCTION.json").resolve():
             raise LDOError(f"refusing to overwrite existing output: {a.output}")
-        a.output.write_text(json.dumps(report,indent=2)+"\\n",encoding="utf-8")
+        a.output.write_text(json.dumps(report,indent=2)+"\n",encoding="utf-8")
         print("LDO rules:",report["summary"]["rule_count"])
         print("exact overlap edges:",report["summary"]["overlap_edge_count"])
         print("overlaps >= 6 words:",report["summary"]["overlap_edges_ge_6_words"])
