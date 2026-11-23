@@ -20,6 +20,7 @@ class LDODataflowTests(unittest.TestCase):
   reads,writes,*_=effects(d)
   self.assertEqual(reads,["r8","r26"])
   self.assertEqual(writes,["r8"])
+  self.assertEqual(d["operands"],["x8","x8","x26"])
  def test_umaddl_decoding(self):
   d=decode_extended(0x9ba82abc)
   self.assertEqual(d["mnemonic"],"umaddl")
@@ -29,6 +30,7 @@ class LDODataflowTests(unittest.TestCase):
   self.assertEqual(d["mnemonic"],"stp")
   reads,writes,*_=effects(d)
   self.assertIn("r9",reads);self.assertIn("r10",reads)
+  self.assertEqual(reads,["r9","r10","r1"])
   self.assertEqual(writes,[])
  def test_masked_words_remain_marked(self):
   r=next(x for x in self.report["rules"] if x["rule_index"]==61)
