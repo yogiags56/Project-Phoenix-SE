@@ -41,6 +41,8 @@ That work is a reference for understanding firmware composition and compatibilit
 
 ## Latest PMU analysis artifacts
 
+- [Phoenix PMU Patch Liveness & NZCV Provenance](tools/phoenix-pmu-patch-liveness/) — audits local register producers, removed definitions, and flag provenance at the four dynamic LDO patch sites; does not claim whole-function liveness.
+
 - [Phoenix PMU LDO Control-Flow Delta Auditor](tools/phoenix-pmu-cf-delta/) — compares original branch/register effects with the four dynamically generated LDO redirects and the static rule-57 NOP, without requiring donor firmware.
 
 - [Phoenix PMU LDO Symbolic Path Model](tools/phoenix-pmu-paths/) — models the four source-declared dynamic redirects and the documented TBZ fall-through without claiming a complete CFG.
