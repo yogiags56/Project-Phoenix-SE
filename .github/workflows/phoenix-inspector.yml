@@ -24,6 +24,7 @@ on:
       - "tools/phoenix-pmu-ldo/**"
       - "tools/phoenix-pmu-dataflow/**"
       - "tools/phoenix-pmu-cf-delta/**"
+      - "tools/phoenix-pmu-patch-liveness/**"
       - "tools/phoenix-pmu-paths/**"
       - "tools/phoenix-pmu-discovery/**"
       - "tools/phoenix-pmu-vmmap/**"
@@ -52,6 +53,7 @@ on:
       - "tools/phoenix-pmu-ldo/**"
       - "tools/phoenix-pmu-dataflow/**"
       - "tools/phoenix-pmu-cf-delta/**"
+      - "tools/phoenix-pmu-patch-liveness/**"
       - "tools/phoenix-pmu-paths/**"
       - "tools/phoenix-pmu-vmmap/**"
       - "tools/phoenix-dashboard/**"
@@ -131,6 +133,9 @@ jobs:
       - name: Test Phoenix PMU LDO Symbolic Paths
         working-directory: tools/phoenix-pmu-paths
         run: python -m unittest discover -s tests -v
+      - name: Test Phoenix PMU Patch Liveness
+        working-directory: tools/phoenix-pmu-patch-liveness
+        run: python -m unittest discover -s tests -v
       - name: Test Phoenix PMU LDO Control-Flow Delta
         working-directory: tools/phoenix-pmu-cf-delta
         run: python -m unittest discover -s tests -v
@@ -151,6 +156,8 @@ jobs:
         run: python -m unittest discover -s tests -v
       - name: Generate donorless PMU LDO symbolic paths
         run: python tools/phoenix-pmu-paths/phoenix_pmu_paths.py research/PMU-SIGNATURE-CATALOG.json --output /tmp/phoenix-pmu-ldo-paths.json
+      - name: Generate donorless PMU patch liveness report
+        run: python tools/phoenix-pmu-patch-liveness/phoenix_pmu_patch_liveness.py research/PMU-SIGNATURE-CATALOG.json --output /tmp/phoenix-pmu-patch-liveness.json
       - name: Generate donorless PMU LDO control-flow delta report
         run: python tools/phoenix-pmu-cf-delta/phoenix_pmu_cf_delta.py research/PMU-SIGNATURE-CATALOG.json --output /tmp/phoenix-pmu-ldo-control-delta.json
       - name: Generate donorless PMU LDO data-flow report
@@ -186,6 +193,7 @@ jobs:
           python tools/phoenix-pmu-ldo/phoenix_pmu_ldo.py --help
           python tools/phoenix-pmu-dataflow/phoenix_pmu_dataflow.py --help
           python tools/phoenix-pmu-cf-delta/phoenix_pmu_cf_delta.py --help
+          python tools/phoenix-pmu-patch-liveness/phoenix_pmu_patch_liveness.py --help
           python tools/phoenix-pmu-paths/phoenix_pmu_paths.py --help
           python tools/phoenix-pmu-discovery/phoenix_pmu_discovery.py --help
           python tools/phoenix-pmu-vmmap/phoenix_pmu_vmmap.py --help
