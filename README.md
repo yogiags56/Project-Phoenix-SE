@@ -36,6 +36,7 @@ That work is a reference for understanding firmware composition and compatibilit
 - [Kernel Collection evidence audit](docs/research/KERNEL_COLLECTION_EVIDENCE_AUDIT.md) — static review of the existing KC, Mach-O, kext, dependency-graph and A9 profile pipeline, including exact-build provenance gaps.
 - [Kernel evidence-set workflow](docs/testing/KERNEL_EVIDENCE_SET_WORKFLOW.md) — reproducible process for binding target/donor reports to exact firmware identities before comparison.
 - [A9 Kernel Compatibility Evidence Matrix](docs/compatibility/A9_KERNEL_COMPATIBILITY_EVIDENCE_MATRIX.md) — CPU, kernel ABI, memory, DeviceTree, interrupt, PMU and driver evidence gates; all unknowns remain explicitly unassessed.
+- [Phoenix A9 Platform Evidence Collector](tools/phoenix-a9-evidence/) — offline parser for researcher-supplied CPU register, cpuinfo, DeviceTree summary and kernel-config exports, with SHA-256 provenance and explicit incomplete states.
 
 ## Latest PMU artifacts
 
@@ -122,6 +123,7 @@ That work is a reference for understanding firmware composition and compatibilit
 - [x] Add a static inventory tool for patcher signature arrays and mutation call sites.
 - [x] Add an exact-build evidence-set validator with SHA-256, tool identity, and cross-report firmware identity checks.
 - [x] Add an optional exact-build evidence-set gate to the Kernel Compatibility Analyzer and hash-match all six comparison inputs.
+- [x] Add an offline A9 platform evidence collector for CPU registers, cpuinfo, DeviceTree summaries and kernel-config exports, including provenance hashes and incomplete-state reporting.
 - [ ] Collect target-device A9 CPU/platform evidence and exact target IPSW metadata.
 - [ ] Investigate graphics, display, touch, audio, camera, and wireless drivers.
 - [ ] Investigate SEP, baseband, boot chain, and restore compatibility.
@@ -197,6 +199,7 @@ The repository will grow as the research becomes reproducible:
     │   ├── phoenix-kext/
     │   ├── phoenix-compat/
     │   ├── phoenix-a9-profile/
+    │   ├── phoenix-a9-evidence/
     │   ├── phoenix-dt-diff/
     │   ├── phoenix-kernel-compat/
     │   ├── phoenix-symbol-diff/
