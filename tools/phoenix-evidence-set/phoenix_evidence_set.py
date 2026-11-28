@@ -114,6 +114,9 @@ def validate_set(role: str, spec: Any, base_dir: Path) -> dict[str, Any]:
             continue
 
         report_path = (base_dir / path_value).resolve()
+        if not report_path.is_relative_to(base_dir.resolve()):
+            errors.append(f"{label}: report path escapes the manifest directory")
+            continue
         try:
             report, actual_sha = load_json(report_path)
         except EvidenceSetError as exc:
@@ -129,6 +132,11 @@ def validate_set(role: str, spec: Any, base_dir: Path) -> dict[str, Any]:
         if observed is not None:
             report_id = normalized_identity(observed, label + ".firmware_identity", errors)
             observed_identities.append((str(name), report_id))
+            report_missing = [field for field, value in report_id.items() if value is None]
+            if report_missing:
+                warnings.append(
+                    f"{label}: firmware_identity is missing fields: " + ", ".join(report_missing)
+                )
             for field in IDENTITY_FIELDS:
                 declared = identity[field]
                 found = report_id[field]
