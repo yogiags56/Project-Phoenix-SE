@@ -28,7 +28,6 @@ Create `research/a9-evidence/manifest.json` with source paths relative to that m
       "name": "cpu-register-dump",
       "kind": "cpu_registers",
       "path": "cpu-registers.txt",
-      "sha256": "OPTIONAL_64_HEX_SHA256",
       "provenance": {
         "origin": "device diagnostic export",
         "device": "iPhone SE (2016)",
