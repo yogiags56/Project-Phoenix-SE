@@ -38,6 +38,7 @@ That work is a reference for understanding firmware composition and compatibilit
 - [A9 Kernel Compatibility Evidence Matrix](docs/compatibility/A9_KERNEL_COMPATIBILITY_EVIDENCE_MATRIX.md) — CPU, kernel ABI, memory, DeviceTree, interrupt, PMU and driver evidence gates; all unknowns remain explicitly unassessed.
 - [Phoenix A9 Platform Evidence Collector](tools/phoenix-a9-evidence/) — offline parser for researcher-supplied CPU register, cpuinfo, DeviceTree summary and kernel-config exports, with SHA-256 provenance and explicit incomplete states.
 - [Phoenix Evidence Bundle Builder](tools/phoenix-evidence-bundle/) — packages only explicitly selected, size-limited UTF-8 reports into a metadata-only ZIP; raw IPSW and firmware payloads remain local.
+- [Windows Low-Memory IPSW Research Workflow](docs/research/WINDOWS_LOW_MEMORY_IPSW_WORKFLOW.md) — staged Target/Donor IPSW inspection for Windows computers with 8 GB RAM, including local-only processing and safe report handoff.
 
 ## Latest PMU artifacts
 
