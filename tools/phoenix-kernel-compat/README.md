@@ -18,15 +18,26 @@ Example:
       --donor-macho reports/donor/kernel-macho.json \
       --donor-kc reports/donor/kernel-collection.json \
       --donor-kext reports/donor/kexts.json \
+      --evidence-set-validation reports/validation/evidence-set-validation.json \
       --out reports/kernel-compatibility.json
 
 Run tests:
 
     python -m unittest discover -s tools/phoenix-kernel-compat/tests -v
 
+## Exact-build evidence gate
+
+The optional `--evidence-set-validation` argument requires a report produced by Phoenix Evidence Set Validator with overall and per-role status `valid`. The analyzer then matches the SHA-256 of all six supplied inputs against the validator's target/donor report entries before comparison. A missing report, incomplete/invalid status, duplicate report name, or hash mismatch stops analysis.
+
+The gate binds the exact input bytes to the validated evidence report; it does not independently authenticate the IPSW or firmware identity. The validator manifest and report remain researcher-supplied evidence. Without this argument, legacy metadata-only mode remains available and the output explicitly records that the gate was not required.
+
+Gate regression tests:
+
+    python -m unittest discover -s tools/phoenix-kernel-compat/tests -v
+
 ## Output
 
-The JSON report records input paths and SHA-256 hashes, Mach-O and Kernel Collection CPU type/subtype tuples, shared and differing architecture evidence, and shared/unique kext bundle identifiers and dependency edges.
+The JSON report records input paths and SHA-256 hashes, Mach-O and Kernel Collection CPU type/subtype tuples, shared and differing architecture evidence, shared/unique kext bundle identifiers and dependency edges, and whether the evidence-set gate was required and matched.
 
 ## Interpretation
 
