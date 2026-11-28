@@ -85,6 +85,49 @@ def kext_inventory(report):
                           "resolved_in_scan":bool(edge.get("resolved"))})
     return ids,edges,invalid
 
+def validate_evidence_set_gate(validation_path, target, donor):
+    """Require a valid provenance report bound to the exact six input report hashes."""
+    try:
+        raw = Path(validation_path).read_bytes()
+        validation = json.loads(raw.decode("utf-8"))
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError) as exc:
+        raise KernelAnalysisError("Cannot read evidence-set validation report: %s" % exc) from exc
+
+    if not isinstance(validation, dict) or validation.get("tool") != "Phoenix Evidence Set Validator":
+        raise KernelAnalysisError("Evidence-set validation input is not a Phoenix Evidence Set Validator report")
+    if validation.get("status") != "valid":
+        raise KernelAnalysisError("Evidence-set status must be valid; got %r" % validation.get("status"))
+
+    sets = validation.get("evidence_sets")
+    if not isinstance(sets, dict):
+        raise KernelAnalysisError("Evidence-set validation report has no evidence_sets object")
+
+    for role, inputs in (("target", target), ("donor", donor)):
+        evidence_set = sets.get(role)
+        if not isinstance(evidence_set, dict) or evidence_set.get("status") != "valid":
+            raise KernelAnalysisError("%s evidence set is not valid" % role)
+        rows = evidence_set.get("reports")
+        if not isinstance(rows, list):
+            raise KernelAnalysisError("%s evidence-set reports must be an array" % role)
+        by_name = {}
+        for row in rows:
+            if not isinstance(row, dict) or not isinstance(row.get("name"), str):
+                raise KernelAnalysisError("%s evidence set contains a malformed report entry" % role)
+            name = row["name"]
+            if name in by_name:
+                raise KernelAnalysisError("%s evidence set contains duplicate report name %r" % (role, name))
+            by_name[name] = row
+        for name, report in inputs.items():
+            row = by_name.get(name)
+            if row is None:
+                raise KernelAnalysisError("%s evidence set is missing required %s report" % (role, name))
+            if row.get("actual_sha256") != report["sha256"]:
+                raise KernelAnalysisError(
+                    "%s %s report hash does not match the validated evidence set" % (role, name)
+                )
+    return hashlib.sha256(raw).hexdigest()
+
+
 def compare(target,donor):
     ta,da=macho_architectures(target["macho"]),macho_architectures(donor["macho"])
     tk,dk=kc_architectures(target["kc"]),kc_architectures(donor["kc"])
@@ -147,6 +190,8 @@ def main(argv=None):
     p.add_argument("--donor-macho",required=True,type=Path)
     p.add_argument("--donor-kc",required=True,type=Path)
     p.add_argument("--donor-kext",required=True,type=Path)
+    p.add_argument("--evidence-set-validation", type=Path,
+                   help="require a valid Phoenix Evidence Set Validator report matching all six input hashes")
     p.add_argument("--out",type=Path,default=Path("phoenix-kernel-compatibility.json"))
     a=p.parse_args(argv)
     try:
@@ -156,7 +201,17 @@ def main(argv=None):
         donor={"macho":read_report(a.donor_macho,"Phoenix Mach-O Analyzer"),
                "kc":read_report(a.donor_kc,"Phoenix Kernel Collection Inspector"),
                "kext":read_report(a.donor_kext,"Phoenix Kext Dependency Analyzer")}
+        if a.evidence_set_validation:
+            validation_sha = validate_evidence_set_gate(a.evidence_set_validation, target, donor)
+        else:
+            validation_sha = None
         result=compare(target,donor)
+        result["evidence_set_gate"] = {
+            "required": a.evidence_set_validation is not None,
+            "validation_report": str(a.evidence_set_validation) if a.evidence_set_validation else None,
+            "validation_report_sha256": validation_sha,
+            "note": "When required, all six report hashes were matched to a valid target/donor evidence-set report." if validation_sha else "No evidence-set gate was supplied; legacy metadata-only mode was used."
+        }
         a.out.parent.mkdir(parents=True,exist_ok=True)
         a.out.write_text(json.dumps(result,indent=2,sort_keys=True)+"\n",encoding="utf-8")
         print("Indication:",result["indication"])
