@@ -35,6 +35,7 @@ That work is a reference for understanding firmware composition and compatibilit
 - [PMU reference audit](research/PMU-REFERENCE-AUDIT.md) — static audit of the iOS 16.1 D2365-to-D2255 PMU patcher. Documents 70 rule entries, LDO control-flow redirects, personality changes, the sample guard, assumptions, and evidence still required. This is not hardware validation.
 - [Kernel Collection evidence audit](docs/research/KERNEL_COLLECTION_EVIDENCE_AUDIT.md) — static review of the existing KC, Mach-O, kext, dependency-graph and A9 profile pipeline, including exact-build provenance gaps.
 - [Kernel evidence-set workflow](docs/testing/KERNEL_EVIDENCE_SET_WORKFLOW.md) — reproducible process for binding target/donor reports to exact firmware identities before comparison.
+- [A9 Kernel Compatibility Evidence Matrix](docs/compatibility/A9_KERNEL_COMPATIBILITY_EVIDENCE_MATRIX.md) — CPU, kernel ABI, memory, DeviceTree, interrupt, PMU and driver evidence gates; all unknowns remain explicitly unassessed.
 
 ## Latest PMU artifacts
 
@@ -120,6 +121,8 @@ That work is a reference for understanding firmware composition and compatibilit
 - [ ] Validate ARM64 patch semantics against original binaries, relocations, and hardware-specific context.
 - [x] Add a static inventory tool for patcher signature arrays and mutation call sites.
 - [x] Add an exact-build evidence-set validator with SHA-256, tool identity, and cross-report firmware identity checks.
+- [x] Add an optional exact-build evidence-set gate to the Kernel Compatibility Analyzer and hash-match all six comparison inputs.
+- [ ] Collect target-device A9 CPU/platform evidence and exact target IPSW metadata.
 - [ ] Investigate graphics, display, touch, audio, camera, and wireless drivers.
 - [ ] Investigate SEP, baseband, boot chain, and restore compatibility.
 - [ ] Assess userspace requirements, including frameworks, launch services, and system services.
